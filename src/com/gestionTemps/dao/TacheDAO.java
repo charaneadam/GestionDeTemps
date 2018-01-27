@@ -9,8 +9,9 @@ public interface TacheDAO {
 	
 	public Tache ajouterTache(Tache tache);
 	public void supprimerTache(Long tacheID);
-	public void ajouterMarqueDansTache(Marque marque);
-	public void supprimerMarqueDeTache(Long marqueID);
+	public void ajouterMarqueDansTache(Long tacheID, Marque marque);
+	public void supprimerMarqueDeTache(Long tacheID, Long marqueID);
+	public Tache recupererTache(Long tacheID);
 	public List<Tache> recupererToutesLesTaches();
 	
 

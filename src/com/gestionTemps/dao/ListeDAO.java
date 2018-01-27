@@ -8,6 +8,7 @@ import com.gestionTemps.beans.Tache;
 public interface ListeDAO {
 	
 	public Liste ajouterListe(Liste liste);
+	public Liste recupererListe(Long listeID);
 	public void supprimerListe(Long listeID);
 	public void ajouterTacheDansListe(Tache tache);
 	public void supprimerTacheDeListe(Long tacheID);

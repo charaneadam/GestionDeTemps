@@ -1,3 +1,2 @@
 /build/
-/src/tests/*
-src/test/*
+src/com/gestionTemps/tests/*

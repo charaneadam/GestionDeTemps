@@ -10,9 +10,10 @@ public class Tache {
 	private String descriptionTache;
 	private Date dateDeCreationDeTache;
 	private Date DateLimiteDeTache;
-	private Integer priorité;
+	private Integer priorite;
 	private List<Marque> marquesDeTache;
 	private Long listeID;
+	
 	public Long getIdTache() {
 		return idTache;
 	}
@@ -43,11 +44,11 @@ public class Tache {
 	public void setDateLimiteDeTache(Date dateLimiteDeTache) {
 		DateLimiteDeTache = dateLimiteDeTache;
 	}
-	public Integer getPriorité() {
-		return priorité;
+	public Integer getPriorite() {
+		return priorite;
 	}
-	public void setPriorité(Integer priorité) {
-		this.priorité = priorité;
+	public void setPriorite(Integer priorite) {
+		this.priorite = priorite;
 	}
 	public List<Marque> getMarquesDeTache() {
 		return marquesDeTache;
@@ -66,13 +67,13 @@ public class Tache {
 		// TODO Auto-generated constructor stub
 	}
 	public Tache(String nomTache, String descriptionTache, Date dateDeCreationDeTache, Date dateLimiteDeTache,
-			Integer priorité, List<Marque> marquesDeTache, Long listeID) {
+			Integer priorite, List<Marque> marquesDeTache, Long listeID) {
 		super();
 		this.nomTache = nomTache;
 		this.descriptionTache = descriptionTache;
 		this.dateDeCreationDeTache = dateDeCreationDeTache;
 		DateLimiteDeTache = dateLimiteDeTache;
-		this.priorité = priorité;
+		this.priorite = priorite;
 		this.marquesDeTache = marquesDeTache;
 		this.listeID = listeID;
 	}

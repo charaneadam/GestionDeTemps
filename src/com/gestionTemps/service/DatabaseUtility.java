@@ -15,7 +15,7 @@ public class DatabaseUtility {
         }
 
         try {
-            connexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee", "root", "");
+            connexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion_temps", "adam", "Local MariaDB Password");
         } catch (SQLException e) {
             e.printStackTrace();
         }
