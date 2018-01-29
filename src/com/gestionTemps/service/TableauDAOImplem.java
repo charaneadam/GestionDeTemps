@@ -42,6 +42,14 @@ public class TableauDAOImplem implements TableauDAO {
 	@Override
 	public void supprimerTableau(Long tableauID) {
 		
+		TableauDAOImplem tableauDAOImplem = new TableauDAOImplem();
+		ListeDAOImpl listeDAOImpl = new ListeDAOImpl();
+		List<Liste> listes = tableauDAOImplem.recupererToutesLesListesDuTableau(tableauID);
+		Iterator<Liste> it = listes.iterator();
+		while(it.hasNext()) {
+			listeDAOImpl.supprimerListe(it.next().getIdListe());
+		}
+		
 		Connection conn = DatabaseUtility.loadDatabase();
 		String sql = "DELETE FROM `tableaux` WHERE `id_tableau` = ?";
 		PreparedStatement preparedStatement = null;

@@ -48,6 +48,13 @@ public class ListeDAOImpl implements ListeDAO {
 	public void supprimerListe(Long listeID) {
 		
 		Connection conn = DatabaseUtility.loadDatabase();
+		ListeDAOImpl listeDAOImpl = new ListeDAOImpl();
+		TacheDAOImpl tacheDAOImpl = new TacheDAOImpl();
+		List<Tache> taches = listeDAOImpl.recupereToutesLesTachesDeLaListe(listeID);
+		Iterator<Tache> it = taches.iterator();
+		while(it.hasNext()) {
+			tacheDAOImpl.supprimerTache(it.next().getIdTache());
+		}
 		String sql = "DELETE FROM `listes` WHERE `id_liste` = ?";
 		PreparedStatement preparedStatement = null;
 		try {

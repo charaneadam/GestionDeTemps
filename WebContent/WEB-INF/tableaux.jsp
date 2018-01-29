@@ -15,7 +15,7 @@
 	</p>
 </c:forEach>
 
-<form action="tableau" method="post">
+<form action="tableaux" method="post">
 	<p>
 		<label for="nom">Nom du tableau : </label>
 		<input type="text" id="nom" name="nom">

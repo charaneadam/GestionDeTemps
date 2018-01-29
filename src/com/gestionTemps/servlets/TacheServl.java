@@ -11,32 +11,28 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.gestionTemps.beans.Marque;
 import com.gestionTemps.beans.Tache;
-import com.gestionTemps.service.TacheDAOImpl;
+import com.gestionTemps.service.TacheService;
 
 @WebServlet("/TacheServl")
 public class TacheServl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private TacheService tacheService = new TacheService();
 
     public TacheServl() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		TacheDAOImpl tacheDAOImpl = new TacheDAOImpl();
-		Long tacheID = Long.parseLong(request.getParameter("id"));
-		Tache tache = tacheDAOImpl.recupererTache(tacheID);
+		Tache tache = tacheService.retournerTache(request);
 		request.setAttribute("tache", tache);
-		List<Marque> marques = tacheDAOImpl.recupererToutesLesMarquesDeLaTache(tacheID);
+		List<Marque> marques = tacheService.retournerTouesLesMarquesDeLaTache(tache.getIdTache());
 		request.setAttribute("marques", marques);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/tache.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nomMarque = request.getParameter("nom");
-		Long tacheID = Long.parseLong(request.getParameter("id"));
-		Marque marque = new Marque(nomMarque);
-		TacheDAOImpl tacheDAOImpl = new TacheDAOImpl();
-		tacheDAOImpl.ajouterMarqueDansTache(tacheID, marque);
+		tacheService.ajouterMarqueALaTache(request);
 		doGet(request, response);
 	}
 
