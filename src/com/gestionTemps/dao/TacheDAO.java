@@ -13,6 +13,7 @@ public interface TacheDAO {
 	public void supprimerMarqueDeTache(Long tacheID, Long marqueID);
 	public Tache recupererTache(Long tacheID);
 	public List<Tache> recupererToutesLesTaches();
+	public List<Marque> recupererToutesLesMarquesDeLaTache(Long tacheID);
 	
 
 }

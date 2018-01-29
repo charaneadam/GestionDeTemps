@@ -19,9 +19,13 @@ public class MarqueDAOImpl implements MarqueDAO {
 		String sql = "INSERT INTO `marques`(`nom_marque`) VALUES (?)";
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = (PreparedStatement) conn.prepareStatement(sql);
+			preparedStatement = (PreparedStatement) conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, marque.getNomMarque());
 			preparedStatement.executeUpdate();
+			ResultSet rs = preparedStatement.getGeneratedKeys();
+			rs.next();
+			Long marqueID = rs.getLong(1);
+			marque.setIdMarque(marqueID);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

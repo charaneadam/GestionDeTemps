@@ -5,7 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import com.gestionTemps.beans.Liste;
 import com.gestionTemps.beans.Tache;
@@ -20,11 +23,15 @@ public class ListeDAOImpl implements ListeDAO {
 		String sql = "INSERT INTO `listes`(`nom_liste`, `description_liste`, `tableau_id`) VALUES (?, ?, ?)";
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = (PreparedStatement) conn.prepareStatement(sql);
+			preparedStatement = (PreparedStatement) conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, liste.getNomListe());
 			preparedStatement.setString(2, liste.getDescriptionListe());
 			preparedStatement.setLong(3, liste.getTableauID());
 			preparedStatement.executeUpdate();
+			ResultSet rs = preparedStatement.getGeneratedKeys();
+		    rs.next();
+		    Long listeID = rs.getLong(1);
+		    liste.setIdListe(listeID);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -85,12 +92,9 @@ public class ListeDAOImpl implements ListeDAO {
 	@Override
 	public void ajouterTacheDansListe(Tache tache) {
 		TacheDAOImpl tacheDAOImpl = new TacheDAOImpl();
-		Tache t = tacheDAOImpl.recupererTache(tache.getIdTache());
 		Connection conn = DatabaseUtility.loadDatabase();
 		String sql;
-		if(t == null) {
-			tacheDAOImpl.ajouterTache(tache);
-		}
+		tache = tacheDAOImpl.ajouterTache(tache);
 		sql = "INSERT INTO `listes_taches`(`liste`, `tache`) VALUES (?, ?)";
 		PreparedStatement preparedStatement = null;
 		try {
@@ -98,6 +102,7 @@ public class ListeDAOImpl implements ListeDAO {
 			preparedStatement.setLong(1, tache.getListeID());
 			preparedStatement.setLong(2, tache.getIdTache());
 			preparedStatement.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -155,6 +160,38 @@ public class ListeDAOImpl implements ListeDAO {
 			e.printStackTrace();
 		}
 		return listes;
+	}
+
+	@Override
+	public List<Tache> recupereToutesLesTachesDeLaListe(Long listeID) {
+		List<Tache> taches = new ArrayList<Tache>();
+		Connection conn = DatabaseUtility.loadDatabase();
+        Statement statement;
+		try {
+			statement = conn.createStatement();
+			ResultSet resultat = statement.executeQuery("SELECT * FROM `listes_taches` WHERE `liste` = " + listeID.toString());
+			Set<Long> taches_id = new HashSet<Long>();
+			while(resultat.next()) {
+				taches_id.add(resultat.getLong("tache"));
+			}
+			Iterator<Long> it = taches_id.iterator();
+			TacheDAOImpl tacheDAOImpl = new TacheDAOImpl();
+			while(it.hasNext()) {
+				taches.add(tacheDAOImpl.recupererTache(it.next()));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if(taches.isEmpty())
+			return null;
+		else
+			return taches;
 	}
 
 }

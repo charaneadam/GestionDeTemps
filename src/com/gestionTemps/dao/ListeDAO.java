@@ -13,5 +13,6 @@ public interface ListeDAO {
 	public void ajouterTacheDansListe(Tache tache);
 	public void supprimerTacheDeListe(Long tacheID);
 	public List<Liste> recupererToutesLesListes();
+	public List<Tache> recupereToutesLesTachesDeLaListe(Long listeID);
 
 }

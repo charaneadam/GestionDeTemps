@@ -43,11 +43,10 @@ public class Liste {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Liste(String nomListe, String descriptionListe, List<Tache> tachesDeLaListe, Long tableauID) {
+	public Liste(String nomListe, String descriptionListe, Long tableauID) {
 		super();
 		this.nomListe = nomListe;
 		this.descriptionListe = descriptionListe;
-		this.tachesDeLaListe = tachesDeLaListe;
 		this.tableauID = tableauID;
 	}
 	

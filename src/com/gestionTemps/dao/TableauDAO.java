@@ -11,6 +11,8 @@ public interface TableauDAO {
 	public void supprimerTableau(Long tableauID);
 	public void ajouterListeAuTableau(Liste liste);
 	public void supprimerListeDuTableau(Long listID);
+	public Tableau recupererTableau(Long tableauID);
 	public List<Tableau> recpererTousLesTableaux();
+	public List<Liste> recupererToutesLesListesDuTableau(Long tableauID);
 
 }

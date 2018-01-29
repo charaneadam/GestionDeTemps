@@ -67,14 +67,13 @@ public class Tache {
 		// TODO Auto-generated constructor stub
 	}
 	public Tache(String nomTache, String descriptionTache, Date dateDeCreationDeTache, Date dateLimiteDeTache,
-			Integer priorite, List<Marque> marquesDeTache, Long listeID) {
+			Integer priorite, Long listeID) {
 		super();
 		this.nomTache = nomTache;
 		this.descriptionTache = descriptionTache;
 		this.dateDeCreationDeTache = dateDeCreationDeTache;
 		DateLimiteDeTache = dateLimiteDeTache;
 		this.priorite = priorite;
-		this.marquesDeTache = marquesDeTache;
 		this.listeID = listeID;
 	}
 	

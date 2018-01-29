@@ -6,6 +6,13 @@ public class Tableau {
 	
 	private Long idTableau;
 	private String nomTableau;
+	private String descriptionTableau;
+	public String getDescriptionTableau() {
+		return descriptionTableau;
+	}
+	public void setDescriptionTableau(String descriptionTableau) {
+		this.descriptionTableau = descriptionTableau;
+	}
 	private List<Liste> listesDuTableau;
 	
 	public Long getIdTableau() {
@@ -30,10 +37,10 @@ public class Tableau {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Tableau(String nomTableau, List<Liste> listesDuTableau) {
+	public Tableau(String nomTableau, String descriptionTableau) {
 		super();
 		this.nomTableau = nomTableau;
-		this.listesDuTableau = listesDuTableau;
+		this.descriptionTableau = descriptionTableau;
 	}
 	
 	

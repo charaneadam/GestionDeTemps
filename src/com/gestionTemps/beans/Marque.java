@@ -29,10 +29,9 @@ public class Marque {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Marque(String nomMarque, List<Tache> tachesDeMarque) {
+	public Marque(String nomMarque) {
 		super();
 		this.nomMarque = nomMarque;
-		this.tachesDeMarque = tachesDeMarque;
 	}
 	
 	

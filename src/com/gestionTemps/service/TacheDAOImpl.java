@@ -7,7 +7,10 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import com.gestionTemps.beans.Marque;
 import com.gestionTemps.beans.Tache;
@@ -23,7 +26,7 @@ public class TacheDAOImpl implements TacheDAO {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = (PreparedStatement) conn.prepareStatement(sql);
+			preparedStatement = (PreparedStatement) conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, tache.getNomTache());
 			preparedStatement.setString(2, tache.getDescriptionTache());
 			preparedStatement.setString(3, sdf.format(tache.getDateDeCreationDeTache()));
@@ -31,6 +34,10 @@ public class TacheDAOImpl implements TacheDAO {
 			preparedStatement.setInt(5, tache.getPriorite());
 			preparedStatement.setLong(6, tache.getListeID());
 			preparedStatement.executeUpdate();
+			ResultSet rs = preparedStatement.getGeneratedKeys();
+			rs.next();
+			Long tacheID = rs.getLong(1);
+			tache.setIdTache(tacheID);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -60,12 +67,9 @@ public class TacheDAOImpl implements TacheDAO {
 	@Override
 	public void ajouterMarqueDansTache(Long tacheID, Marque marque) {
 		MarqueDAOImpl marqueDAOImpl = new MarqueDAOImpl();
-		Marque m = marqueDAOImpl.recupererMarque(marque.getIdMarque());
 		Connection conn = DatabaseUtility.loadDatabase();
 		String sql;
-		if(m == null) {
-			marqueDAOImpl.ajouterMarque(marque);
-		}
+		marque = marqueDAOImpl.ajouterMarque(marque);
 		sql = "INSERT INTO `taches_marques`(`tache`, `marque`) VALUES (?, ?)";
 		PreparedStatement preparedStatement = null;
 		try {
@@ -170,6 +174,38 @@ public class TacheDAOImpl implements TacheDAO {
 		}
         
 		return taches;
+	}
+
+	@Override
+	public List<Marque> recupererToutesLesMarquesDeLaTache(Long tacheID) {
+		List<Marque> marques = new ArrayList<Marque>();
+		Connection conn = DatabaseUtility.loadDatabase();
+        Statement statement;
+		try {
+			statement = conn.createStatement();
+			ResultSet resultat = statement.executeQuery("SELECT * FROM `taches_marques` WHERE `tache` = " + tacheID.toString());
+			Set<Long> marques_id = new HashSet<Long>();
+			while(resultat.next()) {
+				marques_id.add(resultat.getLong("marque"));
+			}
+			Iterator<Long> it = marques_id.iterator();
+			MarqueDAOImpl marqueDAOImpl = new MarqueDAOImpl();
+			while(it.hasNext()) {
+				marques.add(marqueDAOImpl.recupererMarque(it.next()));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if(marques.isEmpty())
+			return null;
+		else
+			return marques;
 	}
 
 }
