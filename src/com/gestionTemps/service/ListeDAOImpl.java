@@ -195,10 +195,7 @@ public class ListeDAOImpl implements ListeDAO {
 				e.printStackTrace();
 			}
 		}
-		if(taches.isEmpty())
-			return null;
-		else
-			return taches;
+		return taches;
 	}
 
 }

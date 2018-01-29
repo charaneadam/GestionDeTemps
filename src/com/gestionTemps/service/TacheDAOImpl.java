@@ -175,6 +175,29 @@ public class TacheDAOImpl implements TacheDAO {
         
 		return taches;
 	}
+	
+	@Override
+	public Set<Long> recupererToutesLesMarquesIDDeLaTache(Long tacheID) {
+		Connection conn = DatabaseUtility.loadDatabase();
+        Statement statement;
+        Set<Long> marques_id = new HashSet<Long>();
+		try {
+			statement = conn.createStatement();
+			ResultSet resultat = statement.executeQuery("SELECT * FROM `taches_marques` WHERE `tache` = " + tacheID.toString());
+			while(resultat.next()) {
+				marques_id.add(resultat.getLong("marque"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return marques_id;
+	}
 
 	@Override
 	public List<Marque> recupererToutesLesMarquesDeLaTache(Long tacheID) {

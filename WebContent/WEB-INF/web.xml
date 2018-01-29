@@ -32,9 +32,7 @@
     <servlet-name>TacheServl</servlet-name>
     <url-pattern>/tache</url-pattern>
   </servlet-mapping>
-  
-  
-    <servlet>
+  <servlet>
     <servlet-name>MarqueServl</servlet-name>
     <servlet-class>com.gestionTemps.servlets.MarqueServl</servlet-class>
   </servlet>
@@ -43,6 +41,14 @@
     <url-pattern>/marque</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+    <servlet-name>TableauSuppr</servlet-name>
+    <servlet-class>com.gestionTemps.servlets.TableauSuppr</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TableauSuppr</servlet-name>
+    <url-pattern>/tableauSuppr</url-pattern>
+  </servlet-mapping>
   
   <jsp-config>
     <jsp-property-group>

@@ -1,5 +1,6 @@
 package com.gestionTemps.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Tableau {
@@ -7,6 +8,15 @@ public class Tableau {
 	private Long idTableau;
 	private String nomTableau;
 	private String descriptionTableau;
+	private int nombreDesListesDansLeTableau;
+	private int nbrTags;
+
+	public int getNombreDesListesDansLeTableau() {
+		return nombreDesListesDansLeTableau;
+	}
+	public void setNombreDesListesDansLeTableau(int nombreDesListesDansLeTableau) {
+		this.nombreDesListesDansLeTableau = nombreDesListesDansLeTableau;
+	}
 	public String getDescriptionTableau() {
 		return descriptionTableau;
 	}
@@ -35,12 +45,32 @@ public class Tableau {
 	}
 	public Tableau() {
 		super();
+		this.nombreDesListesDansLeTableau = 0;
+		this.listesDuTableau = new ArrayList<Liste>();
+		this.nbrTags = 0;
 		// TODO Auto-generated constructor stub
 	}
 	public Tableau(String nomTableau, String descriptionTableau) {
 		super();
 		this.nomTableau = nomTableau;
 		this.descriptionTableau = descriptionTableau;
+		this.nombreDesListesDansLeTableau = 0;
+		this.listesDuTableau = new ArrayList<Liste>();
+		this.nbrTags = 0;
+	}
+	public Tableau(Tableau t) {
+		super();
+		this.nomTableau = t.getNomTableau();
+		this.descriptionTableau = t.descriptionTableau;
+		this.nbrTags = 0;
+		this.nombreDesListesDansLeTableau = t.getNombreDesListesDansLeTableau();
+		this.listesDuTableau = new ArrayList<>(t.getListesDuTableau());
+	}
+	public int getNbrTags() {
+		return nbrTags;
+	}
+	public void setNbrTags(int nbrTags) {
+		this.nbrTags = nbrTags;
 	}
 	
 	

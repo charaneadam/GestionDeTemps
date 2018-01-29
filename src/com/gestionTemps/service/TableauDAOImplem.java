@@ -138,8 +138,9 @@ public class TableauDAOImplem implements TableauDAO {
 		}
 		if(tableaux.isEmpty())
 			return null;
-		else
+		else {
 			return tableaux.get(0);
+		}
 	}
 
 	@Override
@@ -199,10 +200,7 @@ public class TableauDAOImplem implements TableauDAO {
 				e.printStackTrace();
 			}
 		}
-		if(listes.isEmpty())
-			return null;
-		else
-			return listes;
+		return listes;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.gestionTemps.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import com.gestionTemps.beans.Marque;
 import com.gestionTemps.beans.Tache;
@@ -14,6 +15,7 @@ public interface TacheDAO {
 	public Tache recupererTache(Long tacheID);
 	public List<Tache> recupererToutesLesTaches();
 	public List<Marque> recupererToutesLesMarquesDeLaTache(Long tacheID);
+	Set<Long> recupererToutesLesMarquesIDDeLaTache(Long tacheID);
 	
 
 }
