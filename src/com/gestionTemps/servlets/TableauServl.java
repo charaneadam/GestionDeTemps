@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.gestionTemps.beans.Liste;
 import com.gestionTemps.beans.Tableau;
+import com.gestionTemps.beans.TableauCommit;
 import com.gestionTemps.service.TableauService;
 
 @WebServlet("/Tableau")
@@ -25,8 +26,11 @@ public class TableauServl extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Tableau t = tableauService.retournerTableau(request);
 		List<Liste> l = tableauService.retournerListesDuTableau(t.getIdTableau());
+		List<TableauCommit> commits = tableauService.recupererToutesLesCommitesDuTableau(request);
 		request.setAttribute("tableau", t);
 		request.setAttribute("listes", l);
+		request.setAttribute("commits", commits);
+		request.setAttribute("nbrCommits", commits.size());
 		this.getServletContext().getRequestDispatcher("/WEB-INF/tableau.jsp").forward(request, response);
 	}
 

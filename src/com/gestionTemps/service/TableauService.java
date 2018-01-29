@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.gestionTemps.beans.Liste;
 import com.gestionTemps.beans.Tableau;
+import com.gestionTemps.beans.TableauCommit;
 
 public class TableauService {
 	private TableauDAOImplem tableauDAOImplem = new TableauDAOImplem();
@@ -29,6 +30,10 @@ public class TableauService {
 		Long id = Long.parseLong(request.getParameter("id"));
 		Liste liste = new Liste(nom, desc, id);
 		tableauDAOImplem.ajouterListeAuTableau(liste);
+	}
+	
+	public List<TableauCommit> recupererToutesLesCommitesDuTableau(HttpServletRequest request){
+		return tableauDAOImplem.recupererToutesLesCommitesDuTableau(Long.parseLong(request.getParameter("id")));
 	}
 
 }

@@ -124,9 +124,11 @@
                                         <div class="span6">
                                            <br>
                                            <h5><i class="fa fa-align-justify" aria-hidden="true" style="color:#999" ></i> Description</h5>
-                                           <p style="width: 100%; height: 160px" onclick="document.getElementById('textArea').style.display='block';document.getElementById('butt').style.display='block';this.style.display='none';">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des 
-                                            </p>
-                                            <textarea id="textArea" class="" placeholder="Enter text ..." style="width: 100%; height: 160px;display: none;" >Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des 
+                                           <p style="width: 100%; height: 160px" 
+                                         	onclick="document.getElementById('textArea').style.display='block';document.getElementById('butt').style.display='block';this.style.display='none';"
+                                         	>${ tableau.descriptionTableau }</p>
+                                            <textarea id="textArea" class="" placeholder="Enter text ..." style="width: 100%; height: 160px;display: none;" >
+                                            ${ tableau.descriptionTableau }
                                             </textarea>
                                         </div>
                                         <div class="span2">
@@ -196,7 +198,7 @@
                                             <div class="block-content collapse in" >
                                                 
                                                 <div class="span12">
-                                                    <i class="fa fa-share-alt fa-2x" style="color:#999">15</i>                                              
+                                                    <i class="fa fa-share-alt fa-2x" style="color:#999">${ nbrCommits }</i>                                              
                                                 </div>
                                             </div>
                                         </div>
@@ -309,11 +311,13 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="odd gradeX">
-                                                    <td>Creation du projet ${ tableau.nomTableau }</td>
-                                                    <td>18/01/2018</td>
+                                                <c:forEach items="${ commits }" var="commit">
+                                                	<tr class="odd gradeX">
+                                                    <td>${ commit.textCommit }</td>
+                                                    <td>${ commit.dateCommit }</td>
                                                     
                                                 </tr>
+                                                </c:forEach>
 
                                             </tbody>
                                         </table>

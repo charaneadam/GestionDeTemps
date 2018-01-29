@@ -16,6 +16,5 @@ public interface TacheDAO {
 	public List<Tache> recupererToutesLesTaches();
 	public List<Marque> recupererToutesLesMarquesDeLaTache(Long tacheID);
 	Set<Long> recupererToutesLesMarquesIDDeLaTache(Long tacheID);
-	
 
 }
