@@ -6,15 +6,24 @@ public class Utilisateur {
 	private String nomUtilisateur;
 	private String prenomUtilisateur;
 	private String emailUtilisateur;
+	private String motDePasse;
+	
+	public String getMotDePasse() {
+		return motDePasse;
+	}
+	public void setMotDePasse(String motDePasse) {
+		this.motDePasse = motDePasse;
+	}
 	public Utilisateur() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Utilisateur(String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur) {
+	public Utilisateur(String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String motDePasse) {
 		super();
 		this.nomUtilisateur = nomUtilisateur;
 		this.prenomUtilisateur = prenomUtilisateur;
 		this.emailUtilisateur = emailUtilisateur;
+		this.motDePasse = motDePasse;
 	}
 	public Long getIdUtilisateur() {
 		return idUtilisateur;
