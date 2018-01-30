@@ -15,6 +15,6 @@ public interface TableauDAO {
 	public Tableau recupererTableau(Long tableauID);
 	public List<Liste> recupererToutesLesListesDuTableau(Long tableauID);
 	public List<TableauCommit> recupererToutesLesCommitesDuTableau(Long tableauID);
-	List<Tableau> recpererTousLesTableaux(Long idUtilisateur);
+	List<Tableau> recpererTousLesTableaux();
 
 }

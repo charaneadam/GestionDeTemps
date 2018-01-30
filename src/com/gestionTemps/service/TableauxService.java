@@ -19,7 +19,8 @@ public class TableauxService {
 	public List<Tableau> retournerTousLesTableaux(HttpServletRequest request){
 		ListeDAOImpl listeDAOImpl = new ListeDAOImpl();
 		TacheDAOImpl tacheDAOImpl = new TacheDAOImpl();
-		List<Tableau> tableaux = tableauDAOImplem.recpererTousLesTableaux(Long.parseLong(request.getParameter("id")));
+		//List<Tableau> tableaux = tableauDAOImplem.recpererTousLesTableaux(Long.parseLong(request.getParameter("id")));
+		List<Tableau> tableaux = tableauDAOImplem.recpererTousLesTableaux();
 		for (Tableau tableau : tableaux) {
 			List<Liste> listes = new ArrayList<Liste>(tableauDAOImplem.recupererToutesLesListesDuTableau(tableau.getIdTableau()));
 			tableau.setNombreDesListesDansLeTableau(listes.size());
