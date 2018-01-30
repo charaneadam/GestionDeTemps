@@ -70,8 +70,8 @@
                             </li>
                         </ul>
                         <ul class="nav">
-                            <li class="active">
-                                <a href="#">Dashboard</a>
+                            <li>
+                                <a href="#">Profil</a>
                             </li>
                             
                         </ul>
@@ -94,7 +94,7 @@
                                     <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
                                     <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
                                     <li>
-                                        <a href="#">Dashboard</a> <span class="divider">/</span>    
+                                        <a href="#">Profil</a> <span class="divider">/</span>    
                                     </li>
                                     <li>
                                         <a href="tableaux">Projets</a> <span class="divider">/</span>    
@@ -110,7 +110,7 @@
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">${ tableau.nomTableau }</div>
-                                    <div class="pull-right"><span class="badge badge-info">${ tableau.nbrTags }</span>
+                                    <div class="pull-right"><span class="badge badge-info">${ tableau.nombreDesListesDansLeTableau }</span>
                                     </div>
                                 </div>
                                 <div class="block-content collapse in" >
@@ -198,7 +198,7 @@
                                             <div class="block-content collapse in" >
                                                 
                                                 <div class="span12">
-                                                    <i class="fa fa-share-alt fa-2x" style="color:#999">${ nbrCommits }</i>                                              
+                                                    <i class="fa fa-share-alt fa-2x" style="color:#999">${ tableau.nbrCommits }</i>                                              
                                                 </div>
                                             </div>
                                         </div>
@@ -231,15 +231,15 @@
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">Taches de  ${ tableau.nomTableau }</div>
-                                    <div class="pull-right"><span class="badge badge-info">${ tableau.nbrTags }</span>
+                                    <div class="muted pull-left">Listes de  ${ tableau.nomTableau }</div>
+                                    <div class="pull-right"><span class="badge badge-info">${ tableau.nombreDesListesDansLeTableau }</span>
                                     </div>
                                 </div>
                                 <div class="block-content collapse in" >
                                     <div class="span12">
                                        <div class="table-toolbar">
                                           <div class="btn-group">
-                                             <a href="#myModal" data-toggle="modal"><button class="btn btn-success">Ajouter nouveau <i class="icon-plus icon-white"></i></button></a>
+                                             <a href="#myModal" data-toggle="modal"><button class="btn btn-success">Ajouter nouvelle liste <i class="icon-plus icon-white"></i></button></a>
                                           </div>
                                           
                                        </div>
@@ -254,10 +254,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${ listes }" var="liste">
+                                                <c:forEach items="${ listes }" var="liste" varStatus="status">
                                                 <tr class="odd gradeX">
                                                     <td width="">
-                                                        <div class="span12" style="">
+                                                        <div id="nomListe_${ status.index }" class="span12" style="">
                                                             ${ liste.nomListe }
                                                         </div>
                                                         <div class="span2" style="">
@@ -284,8 +284,10 @@
                                                     <td><h4>23/12/2018</h4></td>
                                                     
                                                     <td class="center">
-                                                        <a href="#myModal" data-toggle="modal" ><button class="btn" style="width: 100%"><i class="icon-eye-open"></i> Voire</button></a>
-                                                        <button class="btn btn-danger" style="width: 100%"><i class="icon-remove icon-white"></i> Supprimer</button>
+                                                        <a href="#myModal" data-toggle="modal" ><button id="voir_${ status.index }" onClick="reply_click(this.id)" class="btn" style="width: 100%"><i class="icon-eye-open"></i> Voir </button></a>
+                                                        <a href="listeSuppr?id=${ liste.idListe }"><button class="btn btn-danger" style="width: 100%"><i class="icon-remove icon-white"></i> 
+                                                        	Supprimer
+                                                        </button></a>
                                                     </td>
                                                 </tr>
                                                 </c:forEach>
@@ -297,7 +299,8 @@
                             <!-- /block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">Listes des comts</div>
+                                    <div class="muted pull-left">Liste des commits</div>
+                                    <div class="pull-right"><span class="badge badge-info">${ tableau.nbrCommits }</span></div>
                                 </div>
                                 <div class="block-content collapse in">
                                     <div class="span12">
@@ -335,7 +338,7 @@
                                     <div class="span12" >
                                         <span class="span8" >
                                             <h5><i class="fa fa-tasks" aria-hidden="true" style="color:#999" ></i> Titre</h5>
-                                            <p style="width: 100%;" onclick="document.getElementById('titre').style.display='block';document.getElementById('but').style.display='block';this.style.display='none';">Titre de la tache..</p>
+                                            <p id="XXXtitreXXX" style="width: 100%;" onclick="document.getElementById('titre').style.display='block';document.getElementById('but').style.display='block';this.style.display='none';">Titre de la tache..</p>
                                             <input id="titre" style="display: none;width: auto;" type="text" class="input-xlarge datepicker" id="date01" value="Titre de la tache">
                                             <h5><i class="fa fa-align-justify" aria-hidden="true" style="color:#999" ></i> Description</h5>
                                            <p style="width: 100%; height: 160px" onclick="document.getElementById('textAreaTask').style.display='block';document.getElementById('but').style.display='block';this.style.display='none';">Description du tache ... 
@@ -380,9 +383,14 @@
         <script src="assets/scripts.js"></script>
         <script src="assets/DT_bootstrap.js"></script>
         <script>
-        $(function() {
-            
-        });
+        function reply_click(clicked_id){
+        	var index = clicked_id.lastIndexOf("_");
+            var listeID = clicked_id.substr(index+1)
+            document.getElementsByTagName("XXXtitreXXX").innerHTML = "Test";
+            // As pointed out in comments, 
+            // it is superfluous to have to manually call the modal.
+            // $('#addBookDialog').modal('show');
+        }
         
         </script>
         

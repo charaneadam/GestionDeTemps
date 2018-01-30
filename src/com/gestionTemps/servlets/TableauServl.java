@@ -27,10 +27,11 @@ public class TableauServl extends HttpServlet {
 		Tableau t = tableauService.retournerTableau(request);
 		List<Liste> l = tableauService.retournerListesDuTableau(t.getIdTableau());
 		List<TableauCommit> commits = tableauService.recupererToutesLesCommitesDuTableau(request);
+		t.setNombreDesListesDansLeTableau(l.size());
+		t.setNbrCommits(commits.size());
 		request.setAttribute("tableau", t);
 		request.setAttribute("listes", l);
 		request.setAttribute("commits", commits);
-		request.setAttribute("nbrCommits", commits.size());
 		this.getServletContext().getRequestDispatcher("/WEB-INF/tableau.jsp").forward(request, response);
 	}
 

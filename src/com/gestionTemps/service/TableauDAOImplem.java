@@ -184,13 +184,13 @@ public class TableauDAOImplem implements TableauDAO {
 	}
 
 	@Override
-	public List<Tableau> recpererTousLesTableaux() {
+	public List<Tableau> recpererTousLesTableaux(Long idUtilisateur) {
 		List<Tableau> tableaux = new ArrayList<Tableau>();
 		Connection conn = DatabaseUtility.loadDatabase();
         Statement statement;
 		try {
 			statement = conn.createStatement();
-			ResultSet resultat = statement.executeQuery("SELECT * FROM `tableaux`");
+			ResultSet resultat = statement.executeQuery("SELECT * FROM `tableaux` WHERE `utilisateur_id` = "+idUtilisateur.toString());
 			while(resultat.next()) {
 				Long tableauID = resultat.getLong("id_tableau");
 				String tableauNom = resultat.getString("nom_tableau");

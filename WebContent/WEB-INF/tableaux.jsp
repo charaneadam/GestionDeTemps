@@ -43,8 +43,8 @@
                             </li>
                         </ul>
                         <ul class="nav">
-                            <li class="active">
-                                <a href="#">Dashboard</a>
+                            <li>
+                                <a href="#">Profil</a>
                             </li>
                             
                         </ul>
@@ -71,7 +71,7 @@
                                     <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
                                     <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
                                     <li>
-                                        <a href="#">Dashboard</a> <span class="divider">/</span>    
+                                        <a href="#">Profil</a> <span class="divider">/</span>    
                                     </li>
                                     <li class="active">Projets</li>
                                 </ul>
@@ -103,7 +103,7 @@
 	                                        <span ><i class="fa fa-tags" aria-hidden="true" style="color:#999"></i>&nbsp;${ tableau.nbrTags }</span>
 	                                    </div>
 	                                    <div class="span3" >
-	                                        <span ><i class="fa fa-share-alt" aria-hidden="true" style="color:#999"></i>&nbsp;102</span>
+	                                        <span ><i class="fa fa-share-alt" aria-hidden="true" style="color:#999"></i>&nbsp;${ tableau.nbrCommits }</span>
 	                                    </div>
 	                                    <p style="float: right;margin-top: 5px">
 	                                        <a href="tableau?id=${ tableau.idTableau }"><button class="btn" ><i class="icon-eye-open"></i>Voir</button></a>

@@ -26,15 +26,11 @@ public class TableauSuppr extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		TableauxService tableauxService = new TableauxService();
 		tableauxService.supprimerTableau(request);
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		ServletContext context= getServletContext();
 		RequestDispatcher rd= context.getRequestDispatcher("/tableaux");
 		rd.forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

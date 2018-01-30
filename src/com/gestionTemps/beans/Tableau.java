@@ -10,7 +10,14 @@ public class Tableau {
 	private String descriptionTableau;
 	private int nombreDesListesDansLeTableau;
 	private int nbrTags;
+	private int nbrCommits;
 
+	public int getNbrCommits() {
+		return nbrCommits;
+	}
+	public void setNbrCommits(int nbrCommits) {
+		this.nbrCommits = nbrCommits;
+	}
 	public int getNombreDesListesDansLeTableau() {
 		return nombreDesListesDansLeTableau;
 	}
