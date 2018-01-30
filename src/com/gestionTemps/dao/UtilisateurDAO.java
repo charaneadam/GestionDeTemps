@@ -10,6 +10,7 @@ public interface UtilisateurDAO {
 	public Utilisateur ajouterUtilisateur(Utilisateur utilisateur);
 	public void supprimerUtilisateur(Long idUtilisateur);
 	public Utilisateur recupererUtilisateur(Long idUtilisateur);
+	public Utilisateur recupererUtilisateur(String email, String pass);
 	public boolean emailEstValide(String email);
 	public List<Tableau> tableauxDeLUtilisateur(Long uilisateurID);
 	

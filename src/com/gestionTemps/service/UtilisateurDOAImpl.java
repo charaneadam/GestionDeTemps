@@ -151,4 +151,37 @@ public class UtilisateurDOAImpl implements UtilisateurDAO {
         
 		return tableaux;
 	}
+
+	@Override
+	public Utilisateur recupererUtilisateur(String email, String pass) {
+		List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
+		Connection conn = DatabaseUtility.loadDatabase();
+        Statement statement;
+		try {
+			statement = conn.createStatement();
+			ResultSet resultat = statement.executeQuery("SELECT * FROM `utilisateurs` WHERE "
+					+ "`email_utilisateur` = '" + email +"' AND `password_utilisateur` = '" + pass + "'");
+			while(resultat.next()) {
+				Long id_utilisateur = resultat.getLong("id_utilisateur");
+				String nom_utilisateur = resultat.getString("nom_utilisateur");
+				String prenom_utilisateur = resultat.getString("prenom_utilisateur");
+				String email_utilisateur = resultat.getString("email_utilisateur");
+				String password_utilisateur = resultat.getString("password_utilisateur");
+				Utilisateur utilisateur = new Utilisateur(nom_utilisateur, prenom_utilisateur, email_utilisateur, password_utilisateur);
+				utilisateur.setIdUtilisateur(id_utilisateur);
+				utilisateurs.add(utilisateur);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+        
+		if(utilisateurs.isEmpty()) return null;
+		return utilisateurs.get(0);
+	}
 }
