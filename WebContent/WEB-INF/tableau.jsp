@@ -385,7 +385,7 @@
         <script>
         function reply_click(clicked_id){
         	var index = clicked_id.lastIndexOf("_");
-            var listeID = clicked_id.substr(index+1)
+            var listeID = clicked_id.substr(index+1);
             document.getElementsByTagName("XXXtitreXXX").innerHTML = "Test";
             // As pointed out in comments, 
             // it is superfluous to have to manually call the modal.

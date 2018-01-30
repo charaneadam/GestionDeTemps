@@ -7,28 +7,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.gestionTemps.service.UtilisateurDOAImpl;
 import com.gestionTemps.service.UtilisateurService;
 
-/**
- * Servlet implementation class Login
- */
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     public Login() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		UtilisateurService utilisateurService = new UtilisateurService();
+		Long userID = new Long(-1L);
+		System.out.println(request.getRequestURI());
+		try {
+			userID = utilisateurService.verifierIdentifiant(request);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(userID == -1)
+			response.sendRedirect("./");
+		else response.sendRedirect("tableaux?id="+userID.toString());
 	}
 
 }
