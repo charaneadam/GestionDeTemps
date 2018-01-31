@@ -20,7 +20,6 @@ public class TableauxService {
 		ListeDAOImpl listeDAOImpl = new ListeDAOImpl();
 		TacheDAOImpl tacheDAOImpl = new TacheDAOImpl();
 		List<Tableau> tableaux = tableauDAOImplem.recpererTousLesTableaux(Long.parseLong(request.getSession().getAttribute("userID").toString()));
-		//List<Tableau> tableaux = tableauDAOImplem.recpererTousLesTableaux();
 		for (Tableau tableau : tableaux) {
 			List<Liste> listes = new ArrayList<Liste>(tableauDAOImplem.recupererToutesLesListesDuTableau(tableau.getIdTableau()));
 			tableau.setNombreDesListesDansLeTableau(listes.size());

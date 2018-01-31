@@ -45,7 +45,7 @@ public class Login extends HttpServlet {
 			session.setAttribute("userFirstName", utilisateur.getPrenomUtilisateur());
 			session.setAttribute("userLastName", utilisateur.getNomUtilisateur());
 			session.setAttribute("userEmail", utilisateur.getEmailUtilisateur());
-			response.sendRedirect("tableaux?id="+utilisateur.getIdUtilisateur());
+			response.sendRedirect("tableaux");
 		}
 	}
 

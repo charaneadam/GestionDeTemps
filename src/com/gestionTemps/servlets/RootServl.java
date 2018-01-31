@@ -17,7 +17,7 @@ public class RootServl extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getSession().getAttribute("userID") != null) {
-			response.sendRedirect("tableaux?id="+request.getSession().getAttribute("userID"));
+			response.sendRedirect("tableaux");
 		}
 		else {
 			this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);

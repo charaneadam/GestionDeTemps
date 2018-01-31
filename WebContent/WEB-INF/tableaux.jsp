@@ -5,7 +5,7 @@
         <title>Vos Projets</title>
         <!-- Bootstrap -->
         <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link href="WEB-INF/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+        <link href="./bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="./assets/styles.css" rel="stylesheet" media="screen">
         <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -44,9 +44,11 @@
                         </ul>
                         <ul class="nav">
                             <li>
-                                <a href="#">Profil</a>
+                                <a href="#">Mes Taches</a>
                             </li>
-                            
+                            <li>
+                                <a href="#">Mes Marques</a>
+                            </li>
                         </ul>
                     </div>
                     <!--/.nav-collapse -->
@@ -68,8 +70,6 @@
                         <div class="navbar">
                             <div class="navbar-inner">
                                 <ul class="breadcrumb">
-                                    <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
-                                    <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
                                     <li>
                                         <a href="#">Profil</a> <span class="divider">/</span>    
                                     </li>

@@ -24,15 +24,19 @@ public class TableauServl extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Tableau t = tableauService.retournerTableau(request);
-		List<Liste> l = tableauService.retournerListesDuTableau(t.getIdTableau());
-		List<TableauCommit> commits = tableauService.recupererToutesLesCommitesDuTableau(request);
-		t.setNombreDesListesDansLeTableau(l.size());
-		t.setNbrCommits(commits.size());
-		request.setAttribute("tableau", t);
-		request.setAttribute("listes", l);
-		request.setAttribute("commits", commits);
-		this.getServletContext().getRequestDispatcher("/WEB-INF/tableau.jsp").forward(request, response);
+		if(request.getSession().getAttribute("userID") != null) {
+			Tableau t = tableauService.retournerTableau(request);
+			List<Liste> l = tableauService.retournerListesDuTableau(t.getIdTableau());
+			List<TableauCommit> commits = tableauService.recupererToutesLesCommitesDuTableau(request);
+			t.setNombreDesListesDansLeTableau(l.size());
+			t.setNbrCommits(commits.size());
+			request.setAttribute("tableau", t);
+			request.setAttribute("listes", l);
+			request.setAttribute("commits", commits);		
+			this.getServletContext().getRequestDispatcher("/WEB-INF/tableau.jsp").forward(request, response);
+		} else {
+			response.sendRedirect("./");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

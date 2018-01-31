@@ -1,6 +1,7 @@
 package com.gestionTemps.beans;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Tableau {
@@ -12,7 +13,14 @@ public class Tableau {
 	private int nbrTags;
 	private int nbrCommits;
 	private Long userID;
+	private Date dateCreation;
 
+	public Date getDateCreation() {
+		return dateCreation;
+	}
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
+	}
 	public Long getUserID() {
 		return userID;
 	}

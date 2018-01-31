@@ -28,7 +28,7 @@ public class TableauSuppr extends HttpServlet {
 		else {
 			TableauxService tableauxService = new TableauxService();
 			tableauxService.supprimerTableau(request);
-			response.sendRedirect("tableaux+id="+request.getSession().getAttribute("userID"));
+			response.sendRedirect("tableaux");
 		}
 	}
 

@@ -69,8 +69,11 @@
                             </li>
                         </ul>
                         <ul class="nav">
-                            <li class="active">
-                                <a href="#">Dashboard</a>
+                            <li>
+                                <a href="#">Mes tâches</a>
+                            </li>
+                            <li>
+                                <a href="#">Mes marques</a>
                             </li>
                         </ul>
                     </div>
@@ -89,10 +92,8 @@
                         <div class="navbar">
                             <div class="navbar-inner">
                                 <ul class="breadcrumb">
-                                    <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
-                                    <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
                                     <li>
-                                        <a href="#">Dashboard</a> <span class="divider">/</span>    
+                                        <a href="#">Profil</a> <span class="divider">/</span>    
                                     </li>
                                     <li>
                                         <a href="tableaux?id=${ tableau.idTableau }">Projets</a> <span class="divider">/</span>    
@@ -124,15 +125,17 @@
                                     <div class="span6">
                                        <br>
                                        <h5><i class="fa fa-align-justify" aria-hidden="true" style="color:#999" ></i> Description</h5>
-                                       <p id="textBlock" style="width: 100%; height: 160px" onclick="document.getElementById('textArea').style.display='block';document.getElementById('butt').style.display='block';this.style.display='none';">Entrer Description . . .
-                                        </p>
-                                        <textarea id="textArea" class="" placeholder="Enter text ..." style="width: 100%; height: 160px;display: none;" >Entrer Description . . .
+                                       <p id="textBlock" style="width: 100%; height: 160px" onclick="document.getElementById('textArea').style.display='block';document.getElementById('butt').style.display='block';this.style.display='none';">
+                                       		${ tableau.descriptionTableau }
+                                       </p>
+                                        <textarea id="textArea" class="" placeholder="Enter text ..." style="width: 100%; height: 160px;display: none;" >
+                                        	${ tableau.descriptionTableau }
                                         </textarea>
                                     </div>
                                     <div class="span2">
                                        <br>
                                        <h5><i class="icon-time" aria-hidden="true" style="color:#999" ></i> Date creation</h5>
-                                       <p style="width: 100%;" >20/12/2018</p>
+                                       <p style="width: 100%;" >${ tableau.dateCreation }</p>
                                        <h5><i class="icon-time" aria-hidden="true" style="color:#999" ></i> Date debut</h5>
                                        <p style="width: 100%;">20/12/2018</p>
                                        <h5><i class="icon-time" aria-hidden="true" style="color:#999" ></i> Date fin</h5>
@@ -165,19 +168,22 @@
                                     </span>
                                     <span class="span7" style="background-color: ">
                                         <h5>Priorité des tâches</h5>
-                                        <div class="span4">
-                                            <i class="fa fa-thermometer-full fa-2x" style="color:#999">15 Haute</i>                                              
-                                        </div>
-                                        <div class="span4">
-                                            <i class="fa fa-thermometer-half fa-2x" style="color:#999">5 Normale</i>                                             
-                                        </div>
-                                        <div class="span3">
-                                            <i class="fa fa-thermometer-empty fa-2x" style="color:#999">17 Basse</i>                                            
-                                        </div>
+                                        <span class="span4">
+                                        	<i class="fa fa-cog fa-2x" style="color:#999"></i>
+                                        	<i class="fa fa-cog fa-2x" style="color:#999"></i>
+                                            <i class="fa fa-cog fa-2x" style="color:#999">15 Haute</i>                                              
+                                        </span>
+                                        <span class="span4">
+                                        	<i class="fa fa-cog fa-2x" style="color:#999"></i>
+                                            <i class="fa fa-cog fa-2x" style="color:#999">5 Normale</i>                                             
+                                        </span>
+                                        <span class="span3">
+                                            <i class="fa fa-cog fa-2x" style="color:#999">17 Basse</i>                                          
+                                        </span>
                                     </span>
                                 </div>
                                 <span class="span5">
-                                    <h5>Tags</h5>
+                                    <h5>Marques</h5>
                                     <p>JavaEE / projet integre / etudes / network / pc</p>
                                 </span>
                                 <span class="span2">
@@ -349,14 +355,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="odd gradeX">
-                                                    <td>Creation du projet ${ tableau.nomTableau }</td>
-                                                    <td>18/01/2018</td>
+                                            	<c:forEach items="${ commits }" var="commit">
+                                            	<tr class="odd gradeX">
+                                                    <td>${ commit.textCommit }</td>
+                                                    <td>${ commit.dateCommit }</td>
                                                 </tr>
-                                                 <tr class="odd gradeX">
-                                                    <td>Creation du projet Projet S5</td>
-                                                    <td>18/01/2018</td>
-                                                </tr>
+                                            	</c:forEach>
                                             </tbody>
                                         </table>
                                     </div>

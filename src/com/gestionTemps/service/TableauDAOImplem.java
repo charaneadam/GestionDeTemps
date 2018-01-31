@@ -23,7 +23,7 @@ public class TableauDAOImplem implements TableauDAO {
 	@Override
 	public Tableau ajouterTableau(Tableau tableau) {
 		Connection conn = DatabaseUtility.loadDatabase();
-		String sql = "INSERT INTO `tableaux`(`nom_tableau`, `desc_tableau`, utilisateur_id) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO `tableaux`(`nom_tableau`, `desc_tableau`, `utilisateur_id`, `date_creation`) VALUES (?, ?, ?, ?)";
 		PreparedStatement preparedStatement = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try {
@@ -31,6 +31,7 @@ public class TableauDAOImplem implements TableauDAO {
 			preparedStatement.setString(1, tableau.getNomTableau());
 			preparedStatement.setString(2, tableau.getDescriptionTableau());
 			preparedStatement.setLong(3, tableau.getUserID());
+			preparedStatement.setString(4, sdf.format(new Date()));
 			preparedStatement.executeUpdate();
 			ResultSet rs = preparedStatement.getGeneratedKeys();
 			rs.next();
@@ -162,12 +163,14 @@ public class TableauDAOImplem implements TableauDAO {
 				Long tableauId = resultat.getLong("id_tableau");
 				String tableauNom = resultat.getString("nom_tableau");
 				String tableauDesc = resultat.getString("desc_tableau");
+				Date dateCreation = resultat.getDate("date_creation");
 				Long userID = resultat.getLong("utilisateur_id");
 				Tableau tableau = new Tableau();
 				tableau.setIdTableau(tableauId);
 				tableau.setNomTableau(tableauNom);
 				tableau.setDescriptionTableau(tableauDesc);
 				tableau.setUserID(userID);
+				tableau.setDateCreation(dateCreation);
 				tableaux.add(tableau);
 			}
 		} catch (SQLException e) {
