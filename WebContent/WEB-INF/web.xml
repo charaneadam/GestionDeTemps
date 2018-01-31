@@ -80,14 +80,6 @@
     <servlet-name>Profil</servlet-name>
     <url-pattern>/profil</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>RootServl</servlet-name>
-    <servlet-class>com.gestionTemps.servlets.RootServl</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RootServl</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
   
   <servlet>
     <servlet-name>Deconnecter</servlet-name>
