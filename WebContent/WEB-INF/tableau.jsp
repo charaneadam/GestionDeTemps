@@ -56,7 +56,6 @@
                         <ul class="nav pull-right">
                             <li class="dropdown">
                                 <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> Vincent Gabriel <i class="caret"></i>
-
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
@@ -70,10 +69,9 @@
                             </li>
                         </ul>
                         <ul class="nav">
-                            <li>
-                                <a href="#">Profil</a>
+                            <li class="active">
+                                <a href="#">Dashboard</a>
                             </li>
-                            
                         </ul>
                     </div>
                     <!--/.nav-collapse -->
@@ -94,10 +92,10 @@
                                     <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
                                     <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
                                     <li>
-                                        <a href="#">Profil</a> <span class="divider">/</span>    
+                                        <a href="#">Dashboard</a> <span class="divider">/</span>    
                                     </li>
                                     <li>
-                                        <a href="tableaux">Projets</a> <span class="divider">/</span>    
+                                        <a href="tableaux?id=${ tableau.idTableau }">Projets</a> <span class="divider">/</span>    
                                     </li>
                                     <li class="active">${ tableau.nomTableau }</li>
                                 </ul>
@@ -111,127 +109,117 @@
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">${ tableau.nomTableau }</div>
                                     <div class="pull-right"><span class="badge badge-info">${ tableau.nombreDesListesDansLeTableau }</span>
+                                    <div class="pull-right">
                                     </div>
                                 </div>
-                                <div class="block-content collapse in" >
-                                    <div class="span12">
-                                        <div id="containerIntro">
-                                            <h2>${ tableau.nomTableau }</h2>
-                                            <p style="margin-bottom: 5px"><i class="fa fa-calendar"></i>&nbsp;&nbsp;De&nbsp;&nbsp; <i class="icon-time"></i> 20/12/2015 &nbsp;à&nbsp;&nbsp; <i class="icon-time"></i> 15/01/2016 </p>
+                            </div>
+                            <div class="block-content collapse in" >
+                                <div class="span12">
+                                    <div id="containerIntro">
+                                        <h2>${ tableau.nomTableau }</h2>
+                                        <p style="margin-bottom: 5px"><i class="fa fa-calendar"></i>&nbsp;&nbsp;De&nbsp;&nbsp; <i class="icon-time"></i> 20/12/2015 &nbsp;à&nbsp;&nbsp; <i class="icon-time"></i> 15/01/2016 </p>
+                                    </div>
+                                </div>
+                                <div class="span12">
+                                    <div class="span6">
+                                       <br>
+                                       <h5><i class="fa fa-align-justify" aria-hidden="true" style="color:#999" ></i> Description</h5>
+                                       <p id="textBlock" style="width: 100%; height: 160px" onclick="document.getElementById('textArea').style.display='block';document.getElementById('butt').style.display='block';this.style.display='none';">Entrer Description . . .
+                                        </p>
+                                        <textarea id="textArea" class="" placeholder="Enter text ..." style="width: 100%; height: 160px;display: none;" >Entrer Description . . .
+                                        </textarea>
+                                    </div>
+                                    <div class="span2">
+                                       <br>
+                                       <h5><i class="icon-time" aria-hidden="true" style="color:#999" ></i> Date creation</h5>
+                                       <p style="width: 100%;" >20/12/2018</p>
+                                       <h5><i class="icon-time" aria-hidden="true" style="color:#999" ></i> Date debut</h5>
+                                       <p style="width: 100%;">20/12/2018</p>
+                                       <h5><i class="icon-time" aria-hidden="true" style="color:#999" ></i> Date fin</h5>
+                                       <p style="width: 100%;" >20/12/2018</p>
+                                    </div>
+                                    <div class="span3" style="">
+                                        <div style="margin-top: 30px;background-color: #999999">
+                                          <div class="top">
+                                            <h3 id="Day">Vendredi</h3></div>
+                                          <div class="boody">
+                                              <h3 id="Month">MAR</h3>
+                                              <h1 id="DayNum">15</h1>
+                                              <h6 id="Year">2016</h6>
+                                          </div>
                                         </div>
                                     </div>
-                                    <div class="span12">
-                                        <div class="span6">
-                                           <br>
-                                           <h5><i class="fa fa-align-justify" aria-hidden="true" style="color:#999" ></i> Description</h5>
-                                           <p style="width: 100%; height: 160px" 
-                                         	onclick="document.getElementById('textArea').style.display='block';document.getElementById('butt').style.display='block';this.style.display='none';"
-                                         	>${ tableau.descriptionTableau }</p>
-                                            <textarea id="textArea" class="" placeholder="Enter text ..." style="width: 100%; height: 160px;display: none;" >
-                                            ${ tableau.descriptionTableau }
-                                            </textarea>
-                                        </div>
-                                        <div class="span2">
-                                           <br>
-                                           <h5><i class="icon-time" aria-hidden="true" style="color:#999" ></i> Date creation</h5>
-                                           <p style="width: 100%;" onclick="document.getElementById('dateCreation').style.display='block';document.getElementById('butt').style.display='block';this.style.display='none';">20/12/2018</p>
-                                            <input  id="dateCreation" style="display: none;width: auto;" type="date" class="input-xlarge datepicker" id="date01" value="20/12/2018">
-                                            
-                                           <h5><i class="icon-time" aria-hidden="true" style="color:#999" ></i> Date debut</h5>
-                                           <p style="width: 100%;" onclick="document.getElementById('dateDebut').style.display='block';document.getElementById('butt').style.display='block';this.style.display='none';">20/12/2018</p>
-                                            <input id="dateDebut" style="display: none;width: auto;" type="date" class="input-xlarge datepicker" id="date01" value="20/12/2018">
-                                            
-                                           <h5><i class="icon-time" aria-hidden="true" style="color:#999" ></i> Date fin</h5>
-                                           <p style="width: 100%;" onclick="document.getElementById('dateFin').style.display='block';document.getElementById('butt').style.display='block';this.style.display='none';">20/12/2018</p>
-                                            <input id="dateFin" style="display: none;width: auto;" type="date" class="input-xlarge datepicker" id="date01" value="20/12/2018">
-
-                                        </div>
-                                        <div class="span3" style="">
-                                            <div style="margin-top: 30px;background-color: #999999">
-                                              <div class="top">
-                                                <h3>Vendredi</h3></div>
-                                              <div class="boody">
-                                                  <h3>MAR</h3>
-                                                  <h1>15</h1>
-                                                  <h6>2016</h6>
-                                              </div>
-                                            </div>
-                                          
-                                        </div>
-                                    </div>
-                                    <div class="span12">
-                                        <span class="span4">
-                                            <h5>Tâches</h5>
-                                            <div class="span4">
-                                                <i class="fa fa-check-circle fa-3x" style="color:#999">15</i>                                              
-                                            </div>
-                                            <div class="span4">
-                                                <i class="fa fa-minus-circle fa-3x" style="color:#999">5</i>                                              
-                                            </div>
-                                            <div class="span3">
-                                                <i class="fa fa-refresh fa-3x" style="color:#999">17 </i>                                            
-                                            </div>
-                                        </span>
-                                        <span class="span7" style="background-color: ">
-                                            <h5>Priorité des tâches</h5>
-                                            <div class="span4">
-                                                <i class="fa fa-thermometer-full fa-2x" style="color:#999">15 Haute</i>                                              
-                                            </div>
-                                            <div class="span4">
-                                                <i class="fa fa-thermometer-half fa-2x" style="color:#999">5 Normale</i>                                             
-                                            </div>
-                                            <div class="span3">
-                                                <i class="fa fa-thermometer-empty fa-2x" style="color:#999">17 Basse</i>                                            
-                                            </div>
-                                        </span>
-                                    </div>
-                                    <span class="span5">
-                                        <h5>Tags</h5>
-                                        <p>JavaEE / projet integre / etudes / network / pc</p>
-                                        
-                                    </span>
-                                    <span class="span2">
-                                         <div class="block">
-                                            <div class="navbar navbar-inner block-header">
-                                                <div class="muted pull-left">Commits</div>
-                                            </div>
-                                            <div class="block-content collapse in" >
-                                                
-                                                <div class="span12">
-                                                    <i class="fa fa-share-alt fa-2x" style="color:#999">${ tableau.nbrCommits }</i>                                              
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </span>
+                                </div>
+                                <div class="span12">
                                     <span class="span4">
-                                         <div class="block">
-                                            <div class="navbar navbar-inner block-header">
-                                                <div class="muted pull-left">checklists</div>
-                                            </div>
-                                            <div class="block-content collapse in" >
-                                                
-                                                <div class="span5">
-                                                    <i class="fa fa-check-square fa-2x" style="color:#999">6 Fait</i>                                              
-                                                </div>
-                                                <div class="span6">
-                                                    <i class="fa fa-th-list fa-2x" style="color:#999">15 Totale</i>                                              
-                                                </div>
-                                            </div>
+                                        <h5>Tâches</h5>
+                                        <div class="span4">
+                                            <i class="fa fa-check-circle fa-3x" style="color:#999">15</i>                                              
+                                        </div>
+                                        <div class="span4">
+                                            <i class="fa fa-minus-circle fa-3x" style="color:#999">5</i>                                              
+                                        </div>
+                                        <div class="span3">
+                                            <i class="fa fa-refresh fa-3x" style="color:#999">17 </i>                                            
                                         </div>
                                     </span>
-                                    <span class="span3" id="butt" style="float: right;display: none;">
-                                        <input type="submit" class="btn btn-large btn-block" value='Enregistrer les modifications'/>
+                                    <span class="span7" style="background-color: ">
+                                        <h5>Priorité des tâches</h5>
+                                        <div class="span4">
+                                            <i class="fa fa-thermometer-full fa-2x" style="color:#999">15 Haute</i>                                              
+                                        </div>
+                                        <div class="span4">
+                                            <i class="fa fa-thermometer-half fa-2x" style="color:#999">5 Normale</i>                                             
+                                        </div>
+                                        <div class="span3">
+                                            <i class="fa fa-thermometer-empty fa-2x" style="color:#999">17 Basse</i>                                            
+                                        </div>
                                     </span>
                                 </div>
+                                <span class="span5">
+                                    <h5>Tags</h5>
+                                    <p>JavaEE / projet integre / etudes / network / pc</p>
+                                </span>
+                                <span class="span2">
+                                     <div class="block">
+                                        <div class="navbar navbar-inner block-header">
+                                            <div class="muted pull-left">Commits</div>
+                                        </div>
+                                        <div class="block-content collapse in" >
+                                            
+                                            <div class="span12">
+                                                <i class="fa fa-share-alt fa-2x" style="color:#999">${ tableau.nbrCommits }</i>                                              
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+                                <span class="span4">
+                                     <div class="block">
+                                        <div class="navbar navbar-inner block-header">
+                                            <div class="muted pull-left">checklists</div>
+                                        </div>
+                                        <div class="block-content collapse in" >
+                                            
+                                            <div class="span5">
+                                                <i class="fa fa-check-square fa-2x" style="color:#999">6 Fait</i>                                              
+                                            </div>
+                                            <div class="span6">
+                                                <i class="fa fa-th-list fa-2x" style="color:#999">15 Totale</i>                                              
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+                                <span class="span3" id="butt" style="float: right;display: none;">
+                                    <input type="submit" class="btn btn-large btn-block" value='Enregistrer les modifications'/>
+                                </span>
                             </div>
                             <!-- /block -->
                         </div>
-                        
                         <div class="span12" style="margin-left: 0px;margin-right: 10px">
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">Listes de  ${ tableau.nomTableau }</div>
+                                    <div class="muted pull-left">Taches de  ${ tableau.nomTableau }</div>
                                     <div class="pull-right"><span class="badge badge-info">${ tableau.nombreDesListesDansLeTableau }</span>
                                     </div>
                                 </div>
@@ -239,38 +227,48 @@
                                     <div class="span12">
                                        <div class="table-toolbar">
                                           <div class="btn-group">
-                                             <a href="#myModal" data-toggle="modal"><button class="btn btn-success">Ajouter nouvelle liste <i class="icon-plus icon-white"></i></button></a>
+                                             <a href="#myModal" data-toggle="modal"><button class="btn btn-success">Ajouter nouveau <i class="icon-plus icon-white"></i></button></a>
                                           </div>
                                           
                                        </div>
                                         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example2">
                                             <thead>
                                                 <tr>
-                                                    <th width="35%">Titre</th>
-                                                    <th width="25%">Avancement</th>
+                                                    <th>Titre</th>
+                                                    <th>Avancement</th>
                                                     <th width="14%">Date Debut </th>
                                                     <th width="14">Date fin</th>
                                                     <th width="12%"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${ listes }" var="liste" varStatus="status">
                                                 <tr class="odd gradeX">
                                                     <td width="">
-                                                        <div id="nomListe_${ status.index }" class="span12" style="">
-                                                            ${ liste.nomListe }
+                                                        <a onclick="tggelDropDown('1');"><h5><i id="iconAngle1" class="fa fa-angle-double-right" aria-hidden="true"></i> Debut de conception</h5></a>
                                                         </div>
-                                                        <div class="span2" style="">
-                                                            <i class="fa fa-align-justify" aria-hidden="true" style="color:#999" ></i>
+                                                        <div id="uniform1" style="display: none;">
+                                                            <label id="" class="uniform" style="padding-left: 15px;">
+                                                                <input class="uniform_on" type="checkbox" id="optionsCheckbox" value="option1" disabled>
+                                                                    Option one is this and that&mdash;be sure to include why it's great
+                                                            </label>
+                                                            <label id="" class="uniform" style="padding-left: 15px;">
+                                                                <input class="uniform_on" type="checkbox" id="optionsCheckbox" value="option1" checked disabled>
+                                                                    Option one is this and that&mdash;be sure to include why it's great
+                                                            </label>
                                                         </div>
-                                                        <div class="span2" >
-                                                            <i class="fa fa-list" aria-hidden="true" style="color:#999"></i>
-                                                        </div>
-                                                        <div class="span3" >
-                                                            <span ><i class="fa fa-tags" aria-hidden="true" style="color:#999"></i>&nbsp;4</span>
-                                                        </div>
-                                                        <div class="span3" >
-                                                            <span ><i class="fa fa-share-alt" aria-hidden="true" style="color:#999"></i>&nbsp;12</span>
+                                                        <div id="racc">
+                                                            <div class="span2" style="">
+                                                                <i class="fa fa-align-justify" aria-hidden="true" style="color:#999" ></i>
+                                                            </div>
+                                                            <div class="span2" >
+                                                                <i class="fa fa-list" aria-hidden="true" style="color:#999"></i>
+                                                            </div>
+                                                            <div class="span3" >
+                                                                <span ><i class="fa fa-tags" aria-hidden="true" style="color:#999"></i>&nbsp;4</span>
+                                                            </div>
+                                                            <div class="span3" >
+                                                                <span ><i class="fa fa-share-alt" aria-hidden="true" style="color:#999"></i>&nbsp;12</span>
+                                                            </div>
                                                         </div>
                                                     </td>
                                                     <td class="center"> 
@@ -284,13 +282,51 @@
                                                     <td><h4>23/12/2018</h4></td>
                                                     
                                                     <td class="center">
-                                                        <a href="#myModal" data-toggle="modal" ><button id="voir_${ status.index }" onClick="reply_click(this.id)" class="btn" style="width: 100%"><i class="icon-eye-open"></i> Voir </button></a>
-                                                        <a href="listeSuppr?id=${ liste.idListe }"><button class="btn btn-danger" style="width: 100%"><i class="icon-remove icon-white"></i> 
-                                                        	Supprimer
-                                                        </button></a>
+                                                        <a href="#myModal" data-toggle="modal" ><button class="btn" style="width: 100%"><i class="icon-eye-open"></i> Voire</button></a>
+                                                        <button class="btn btn-danger" style="width: 100%"><i class="icon-remove icon-white"></i> Supprimer</button>
                                                     </td>
                                                 </tr>
-                                                </c:forEach>
+                                                <tr class="odd gradeX">
+                                                    <td width="">
+                                                        <a onclick="tggelDropDown('2');"><h5><i id="iconAngle2" class="fa fa-angle-double-right" aria-hidden="true"></i> Debut de conception</h5></a>
+                                                        </div>
+                                                        <div id="uniform2" style="display: none;">
+                                                            <label id="" class="uniform" style="padding-left: 15px;">
+                                                                <input class="uniform_on" type="checkbox" id="optionsCheckbox" value="option1" disabled>
+                                                                    Option one is this and that&mdash;be sure to include why it's great
+                                                            </label>
+                                                            <label id="" class="uniform" style="padding-left: 15px;">
+                                                                <input class="uniform_on" type="checkbox" id="optionsCheckbox" value="option1" checked disabled>
+                                                                    Option one is this and that&mdash;be sure to include why it's great
+                                                            </label>
+                                                        </div>
+                                                        <div id="racc">
+                                                            <div class="span2" >
+                                                                <i class="fa fa-list" aria-hidden="true" style="color:#999"></i>
+                                                            </div>
+                                                            <div class="span3" >
+                                                                <span ><i class="fa fa-tags" aria-hidden="true" style="color:#999"></i>&nbsp;4</span>
+                                                            </div>
+                                                            <div class="span3" >
+                                                                <span ><i class="fa fa-share-alt" aria-hidden="true" style="color:#999"></i>&nbsp;12</span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="center"> 
+                                                        <div class="progress progress-striped active" style="height: 35px;margin-top: 10px;color: #999999">
+                                                            <div style="width: 10%;" class="bar"><h4>10%</h4></div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h4>28/10/2018</h4>
+                                                    </td>
+                                                    <td><h4>02/12/2018</h4></td>
+                                                    
+                                                    <td class="center">
+                                                        <a href="#myModal" data-toggle="modal"><button class="btn" style="width: 100%"><i class="icon-eye-open"></i> Voire</button></a>
+                                                        <button class="btn btn-danger" style="width: 100%"><i class="icon-remove icon-white"></i> Supprimer</button>
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -299,7 +335,7 @@
                             <!-- /block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">Liste des commits</div>
+                                    <div class="muted pull-left">Listes des commits</div>
                                     <div class="pull-right"><span class="badge badge-info">${ tableau.nbrCommits }</span></div>
                                 </div>
                                 <div class="block-content collapse in">
@@ -310,18 +346,17 @@
                                                 <tr>
                                                     <th>Commit</th>
                                                     <th>Date</th>
-                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${ commits }" var="commit">
-                                                	<tr class="odd gradeX">
-                                                    <td>${ commit.textCommit }</td>
-                                                    <td>${ commit.dateCommit }</td>
-                                                    
+                                                <tr class="odd gradeX">
+                                                    <td>Creation du projet ${ tableau.nomTableau }</td>
+                                                    <td>18/01/2018</td>
                                                 </tr>
-                                                </c:forEach>
-
+                                                 <tr class="odd gradeX">
+                                                    <td>Creation du projet Projet S5</td>
+                                                    <td>18/01/2018</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -337,13 +372,24 @@
                                 <div class="modal-body block-content" style="max-height: 580px;">
                                     <div class="span12" >
                                         <span class="span8" >
-                                            <h5><i class="fa fa-tasks" aria-hidden="true" style="color:#999" ></i> Titre</h5>
-                                            <p id="XXXtitreXXX" style="width: 100%;" onclick="document.getElementById('titre').style.display='block';document.getElementById('but').style.display='block';this.style.display='none';">Titre de la tache..</p>
-                                            <input id="titre" style="display: none;width: auto;" type="text" class="input-xlarge datepicker" id="date01" value="Titre de la tache">
+                                            <div class="span7">
+                                                <h5><i class="fa fa-tasks" aria-hidden="true" style="color:#999" ></i> Titre</h5>
+                                                <p style="width: 100%;" onclick="document.getElementById('titre').style.display='block';document.getElementById('but').style.display='block';this.style.display='none';">Titre de la tache..</p>
+                                                <input id="titre" style="display: none;width: 100%;" type="text" class="input-xlarge "  value="Titre de la tache">
+                                            </div>
+                                            <div class="span5">
+                                                <h5><i class="fa fa-thermometer-full" aria-hidden="true" style="color:#999" ></i> Priorité</h5>
+                                                <p style="width: 100%;" onclick="document.getElementById('priorite').style.display='block';document.getElementById('but').style.display='block';this.style.display='none';">Normale</p>
+                                                <select id="priorite" style="display: none;width: 100%;"  class="input-xlarge "  title="priorite">
+                                                    <option value="Haute"> Haute</option>
+                                                    <option value="Normale"> Normale</option>
+                                                    <option value="Basse"> Basse</option>
+                                                </select>
+                                            </div>
                                             <h5><i class="fa fa-align-justify" aria-hidden="true" style="color:#999" ></i> Description</h5>
-                                           <p style="width: 100%; height: 160px" onclick="document.getElementById('textAreaTask').style.display='block';document.getElementById('but').style.display='block';this.style.display='none';">Description du tache ... 
+                                           <p style="width: 100%; height: 120px" onclick="document.getElementById('textAreaTask').style.display='block';document.getElementById('but').style.display='block';this.style.display='none';">Description du tache ... 
                                             </p>
-                                            <textarea id="textAreaTask" class="" placeholder="Enter text ..." style="width: 100%; height: 160px;display: none;" >Description du tache ... 
+                                            <textarea id="textAreaTask" class="" placeholder="Enter text ..." style="width: 100%; height: 120px;display: none;" >Description du tache ... 
                                             </textarea>
                                         </span>
                                         <span class="span4" style="float: right;">
@@ -357,14 +403,75 @@
                                                 <p style="width: 100%;" onclick="document.getElementById('dateFinTask').style.display='block';document.getElementById('but').style.display='block';this.style.display='none';">20/12/2018</p>
                                                 <input id="dateFinTask" style="display: none;width: 78%;" type="date" class="input-xlarge datepicker" id="date01" value="20/12/2018">
                                             </div>
-                                            <div class="span10">
-                                                <button type="button" class="btn btn-large btn-block" > <i class="fa fa-list" aria-hidden="true"  ></i> &nbsp;&nbsp;&nbsp;&nbsp;Ajouter checklist</button>
-                                                
+                                            <div class="span8">
+                                                <img src="images/manage.png" style="margin-left: 15px">
                                             </div>
                                         </span>
                                     </div>
+                                    <div class="span11">
+                                        <div class="span7">
+                                            <h5><i class="fa fa-list" aria-hidden="true" style="color:#999" ></i> Ckecklists</h5>
+                                            <a onclick="document.getElementById('checklistInput').style.display='block';document.getElementById('but').style.display='block';">
+                                                    Ajouter une checkliste ...
+                                            </a>
+                                            <div id="lists">
+                                                <label id="" class="uniform" style="padding-left: 15px;">
+                                                    <input class="uniform_on" type="checkbox" id="optionsCheckbox" value="option1">
+                                                    Option one is this and that&mdash;be sure to include why it's great
+                                                </label>
+                                                <label id="" class="uniform" style="padding-left: 15px;">
+                                                    <input class="uniform_on" type="checkbox" id="optionsCheckbox" value="option1" checked>
+                                                        Option one is this and that&mdash;be sure to include why it's great
+                                                </label> 
+                                            </div>
+                                            <br>
+                                            <div  id="checklistInput" style="display: none">
+                                                <input type="text" id="textlist"  class="input-xlarge"  value="Entrer checklist">
+                                                <button type="button" class="btn btn-primary" onclick="ajouterList();">Ajouter</button>   
+                                            </div>
+                                        </div>
+                                        <div class="span5">
+                                            <h5><i class="fa fa-tags" aria-hidden="true" style="color:#999" ></i> Tags</h5>
+                                            <a onclick="document.getElementById('tagsInput').style.display='block';document.getElementById('but').style.display='block';">
+                                                    Ajouter un tag ...
+                                            </a>
+                                            <div id="tags">
+                                                <label id="" class="uniform" style="padding-left: 15px;">
+                                                    <input class="uniform_on" type="text" id="optionsCheckbox" value="tags">
+                                                </label>
+                                                <label id="" class="uniform" style="padding-left: 15px;">
+                                                    <input class="uniform_on" type="text" id="optionsCheckbox" value="option1" >
+                                                </label> 
+                                            </div>
+                                            <br>
+                                            <div  id="tagsInput" style="display: none">
+                                                <input type="text" id="texttag"  class="input-xlarge"  value="Entrer tag">
+                                                <button type="button" class="btn btn-primary" onclick="ajouterTag();">Ajouter</button>   
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <h5><i class="fa fa-list" aria-hidden="true" style="color:#999" ></i> Commits</h5>
+                                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+                                            <thead>
+                                                <tr>
+                                                    <th>Commit</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="odd gradeX">
+                                                    <td>Creation du projet ${ tableau.nomTableau }</td>
+                                                    <td>18/01/2018</td>
+                                                </tr>
+                                                 <tr class="odd gradeX">
+                                                    <td>Creation du projet Projet S5</td>
+                                                    <td>18/01/2018</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                     <span class="span4" id="but" style="float: right;display: none;">
-                                        <input type="submit" class="btn btn-large btn-block" value='Enregistrer les modifications'/>
+                                        <input type="submit" class="btn btn-large btn-block" value='Enregistrer les modifications'/>                      
                                     </span>
                                 </div>
                             </div>
@@ -372,9 +479,8 @@
                     </div>
 			    </div>
 			</div>
-            
         </div>
-        
+                
         <script src="vendors/jquery-1.9.1.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="vendors/datatables/js/jquery.dataTables.min.js"></script>

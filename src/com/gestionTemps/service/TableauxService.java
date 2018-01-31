@@ -19,8 +19,8 @@ public class TableauxService {
 	public List<Tableau> retournerTousLesTableaux(HttpServletRequest request){
 		ListeDAOImpl listeDAOImpl = new ListeDAOImpl();
 		TacheDAOImpl tacheDAOImpl = new TacheDAOImpl();
-		//List<Tableau> tableaux = tableauDAOImplem.recpererTousLesTableaux(Long.parseLong(request.getParameter("id")));
-		List<Tableau> tableaux = tableauDAOImplem.recpererTousLesTableaux();
+		List<Tableau> tableaux = tableauDAOImplem.recpererTousLesTableaux(Long.parseLong(request.getSession().getAttribute("userID").toString()));
+		//List<Tableau> tableaux = tableauDAOImplem.recpererTousLesTableaux();
 		for (Tableau tableau : tableaux) {
 			List<Liste> listes = new ArrayList<Liste>(tableauDAOImplem.recupererToutesLesListesDuTableau(tableau.getIdTableau()));
 			tableau.setNombreDesListesDansLeTableau(listes.size());
@@ -47,12 +47,15 @@ public class TableauxService {
 		String nom = request.getParameter("nom");
 		String desc = request.getParameter("desc");
 		Tableau tableau = new Tableau(nom, desc);
+		tableau.setUserID(Long.parseLong(request.getSession().getAttribute("userID").toString()));
 		tableauDAOImplem.ajouterTableau(tableau);
 	}
 	
 	public void supprimerTableau(HttpServletRequest request) {
 		tableauDAOImplem = new TableauDAOImplem();
-		tableauDAOImplem.supprimerTableau(Long.parseLong(request.getParameter("id")));
+		Long tableauID = Long.parseLong(request.getParameter("id"));
+		if(tableauDAOImplem.recupererTableau(tableauID).getUserID() == Long.parseLong(request.getSession().getAttribute("userID").toString()))
+			tableauDAOImplem.supprimerTableau(tableauID);
 	}
 
 }

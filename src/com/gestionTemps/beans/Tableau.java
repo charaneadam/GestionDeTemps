@@ -11,7 +11,14 @@ public class Tableau {
 	private int nombreDesListesDansLeTableau;
 	private int nbrTags;
 	private int nbrCommits;
+	private Long userID;
 
+	public Long getUserID() {
+		return userID;
+	}
+	public void setUserID(Long userID) {
+		this.userID = userID;
+	}
 	public int getNbrCommits() {
 		return nbrCommits;
 	}
@@ -55,7 +62,8 @@ public class Tableau {
 		this.nombreDesListesDansLeTableau = 0;
 		this.listesDuTableau = new ArrayList<Liste>();
 		this.nbrTags = 0;
-		// TODO Auto-generated constructor stub
+		this.nbrCommits = 0;
+		this.nombreDesListesDansLeTableau = 0;
 	}
 	public Tableau(String nomTableau, String descriptionTableau) {
 		super();
@@ -64,6 +72,8 @@ public class Tableau {
 		this.nombreDesListesDansLeTableau = 0;
 		this.listesDuTableau = new ArrayList<Liste>();
 		this.nbrTags = 0;
+		this.nbrCommits = 0;
+		this.nombreDesListesDansLeTableau = 0;
 	}
 	public Tableau(Tableau t) {
 		super();

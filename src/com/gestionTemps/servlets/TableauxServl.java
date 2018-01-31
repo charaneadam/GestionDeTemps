@@ -22,9 +22,14 @@ public class TableauxServl extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Tableau> tableaux = tableauxService.retournerTousLesTableaux(request);
-		request.setAttribute("tableaux", tableaux);
-		this.getServletContext().getRequestDispatcher("/WEB-INF/tableaux.jsp").forward(request, response);
+		if(request.getSession().getAttribute("userID") == null) {
+			response.sendRedirect("./");
+		}
+		else {
+			List<Tableau> tableaux = tableauxService.retournerTousLesTableaux(request);
+			request.setAttribute("tableaux", tableaux);
+			this.getServletContext().getRequestDispatcher("/WEB-INF/tableaux.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

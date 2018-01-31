@@ -23,13 +23,14 @@ public class TableauDAOImplem implements TableauDAO {
 	@Override
 	public Tableau ajouterTableau(Tableau tableau) {
 		Connection conn = DatabaseUtility.loadDatabase();
-		String sql = "INSERT INTO `tableaux`(`nom_tableau`, `desc_tableau`) VALUES (?, ?)";
+		String sql = "INSERT INTO `tableaux`(`nom_tableau`, `desc_tableau`, utilisateur_id) VALUES (?, ?, ?)";
 		PreparedStatement preparedStatement = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try {
 			preparedStatement = (PreparedStatement) conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, tableau.getNomTableau());
 			preparedStatement.setString(2, tableau.getDescriptionTableau());
+			preparedStatement.setLong(3, tableau.getUserID());
 			preparedStatement.executeUpdate();
 			ResultSet rs = preparedStatement.getGeneratedKeys();
 			rs.next();
@@ -161,10 +162,12 @@ public class TableauDAOImplem implements TableauDAO {
 				Long tableauId = resultat.getLong("id_tableau");
 				String tableauNom = resultat.getString("nom_tableau");
 				String tableauDesc = resultat.getString("desc_tableau");
+				Long userID = resultat.getLong("utilisateur_id");
 				Tableau tableau = new Tableau();
 				tableau.setIdTableau(tableauId);
 				tableau.setNomTableau(tableauNom);
 				tableau.setDescriptionTableau(tableauDesc);
+				tableau.setUserID(userID);
 				tableaux.add(tableau);
 			}
 		} catch (SQLException e) {
@@ -184,14 +187,14 @@ public class TableauDAOImplem implements TableauDAO {
 	}
 
 	@Override
-	public List<Tableau> recpererTousLesTableaux() {
+	public List<Tableau> recpererTousLesTableaux(Long idUtilisateur) {
 		List<Tableau> tableaux = new ArrayList<Tableau>();
 		Connection conn = DatabaseUtility.loadDatabase();
         Statement statement;
 		try {
 			statement = conn.createStatement();
-			ResultSet resultat = statement.executeQuery("SELECT * FROM `tableaux`");
-			//ResultSet resultat = statement.executeQuery("SELECT * FROM `tableaux` WHERE `utilisateur_id` = "+idUtilisateur.toString());
+			//ResultSet resultat = statement.executeQuery("SELECT * FROM `tableaux`");
+			ResultSet resultat = statement.executeQuery("SELECT * FROM `tableaux` WHERE `utilisateur_id` = "+idUtilisateur.toString());
 			while(resultat.next()) {
 				Long tableauID = resultat.getLong("id_tableau");
 				String tableauNom = resultat.getString("nom_tableau");
