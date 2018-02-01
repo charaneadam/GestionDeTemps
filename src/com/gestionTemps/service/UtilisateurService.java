@@ -18,5 +18,14 @@ public class UtilisateurService {
 		Utilisateur utilisateur = utilisateurDOAImpl.recupererUtilisateur(email, pass);
 		return utilisateur;
 	}
+	
+	public Utilisateur ajouterUtilisateur(HttpServletRequest request) {
+		String prenom = request.getParameter("prenom");
+		String nom = request.getParameter("nom");
+		String email = request.getParameter("email");
+		String pass = request.getParameter("pass");
+		Utilisateur utilisateur = new Utilisateur(nom, prenom, email, pass);
+		return utilisateurDOAImpl.ajouterUtilisateur(utilisateur);
+	}
 
 }

@@ -6,36 +6,37 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class SignUp
- */
+import com.gestionTemps.beans.Utilisateur;
+import com.gestionTemps.service.UtilisateurService;
+
 @WebServlet("/SignUp")
 public class SignUp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public SignUp() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		if(request.getSession().getAttribute("userID") != null) {
+			response.sendRedirect("tableaux");
+		}
+		else {
+			this.getServletContext().getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		UtilisateurService utilisateurService = new UtilisateurService();
+		Utilisateur utilisateur = utilisateurService.ajouterUtilisateur(request);
+		HttpSession session = request.getSession(true);
+		session.setAttribute("userID", utilisateur.getIdUtilisateur());
+		session.setAttribute("userFirstName", utilisateur.getPrenomUtilisateur());
+		session.setAttribute("userLastName", utilisateur.getNomUtilisateur());
+		session.setAttribute("userEmail", utilisateur.getEmailUtilisateur());
+		response.sendRedirect("login");
 	}
 
 }
