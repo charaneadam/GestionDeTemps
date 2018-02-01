@@ -15,6 +15,7 @@ import java.util.Set;
 import com.gestionTemps.beans.Liste;
 import com.gestionTemps.beans.Tableau;
 import com.gestionTemps.beans.TableauCommit;
+import com.gestionTemps.beans.Tache;
 import com.gestionTemps.dao.TableauDAO;
 import com.mysql.jdbc.PreparedStatement;
 
@@ -274,6 +275,98 @@ public class TableauDAOImplem implements TableauDAO {
 			}
 		}
 		return commits;
+	}
+
+	@Override
+	public void ajouterTacheAuTableau(Tache tache) {
+		TableauDAOImplem tableauDAOImplem = new TableauDAOImplem();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		TacheDAOImpl tacheDAOImpl = new TacheDAOImpl();
+		Connection conn = DatabaseUtility.loadDatabase();
+		String sql;
+		tache = tacheDAOImpl.ajouterTache(tache);
+		sql = "INSERT INTO `tableaux_taches`(`tableau`, `tache`) VALUES (?, ?)";
+		PreparedStatement preparedStatement = null;
+		try {
+			preparedStatement = (PreparedStatement) conn.prepareStatement(sql);
+			preparedStatement.setLong(1, tache.getTableauID());
+			preparedStatement.setLong(2, tache.getIdTache());
+			preparedStatement.executeUpdate();
+			Tableau tableau = tableauDAOImplem.recupererTableau(tache.getTableauID());
+			sql = "INSERT INTO `commits`(`text_commit`, `date_commit`, `tableau_id`) VALUES (?, ?, ?)";
+			String textCommit = "La tache " + tache.getNomTache() + " à été ajouté dans " + tableau.getNomTableau();
+			preparedStatement.setString(1, textCommit);
+			preparedStatement.setString(2, sdf.format(new Date()));
+			preparedStatement.setString(3, tableau.getIdTableau().toString());
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void supprimerTacheDuTableau(Long tacheID) {
+		TableauDAOImplem tableauDAOImplem = new TableauDAOImplem();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		TacheDAOImpl tacheDAOImpl = new TacheDAOImpl();
+		Tache t = tacheDAOImpl.recupererTache(tacheID);
+		
+		if(t == null) return;
+		
+		Connection conn = DatabaseUtility.loadDatabase();
+		String sql = "DELETE FROM `tableaux_taches` WHERE `tableau` = ? and `tache` = ?";
+		PreparedStatement preparedStatement = null;
+		try {
+			preparedStatement = (PreparedStatement) conn.prepareStatement(sql);
+			preparedStatement.setLong(1, t.getTableauID());
+			preparedStatement.setLong(2, tacheID);
+			preparedStatement.executeUpdate();
+			tacheDAOImpl.supprimerTache(tacheID);
+			Tableau tableau = tableauDAOImplem.recupererTableau(t.getTableauID());
+			sql = "INSERT INTO `commits`(`text_commit`, `date_commit`, `tableau_id`) VALUES (?, ?, ?)";
+			String textCommit = "La tache " + t.getNomTache() + " à été supprimé du " + tableau.getNomTableau();
+			preparedStatement.setString(1, textCommit);
+			preparedStatement.setString(2, sdf.format(new Date()));
+			preparedStatement.setString(3, tableau.getIdTableau().toString());
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public List<Tache> recupererToutesLesTachesDuTableau(Long tableauID) {
+		List<Tache> taches = new ArrayList<Tache>();
+		Connection conn = DatabaseUtility.loadDatabase();
+        Statement statement;
+		try {
+			statement = conn.createStatement();
+			ResultSet resultat = statement.executeQuery("SELECT * FROM `tableaux_taches` WHERE `tableau` = " + tableauID.toString());
+			Set<Long> taches_id = new HashSet<Long>();
+			while(resultat.next()) {
+				taches_id.add(resultat.getLong("tache"));
+			}
+			Iterator<Long> it = taches_id.iterator();
+			TacheDAOImpl tacheDAOImpl = new TacheDAOImpl();
+			while(it.hasNext()) {
+				taches.add(tacheDAOImpl.recupererTache(it.next()));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return taches;
 	}
 
 }

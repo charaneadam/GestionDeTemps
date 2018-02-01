@@ -37,10 +37,28 @@ public class MarqueDAOImpl implements MarqueDAO {
 		}
 		return marque;
 	}
+	
+	private void supprimerMarqueDuMapping(Long marqueID) {
+		Connection conn = DatabaseUtility.loadDatabase();
+		String sql = "DELETE FROM `taches_marques` WHERE `marque` = ?";
+		PreparedStatement preparedStatement = null;
+		try {
+			preparedStatement = (PreparedStatement) conn.prepareStatement(sql);
+			preparedStatement.setLong(1, marqueID);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 	@Override
 	public void supprimerMarque(Long marqueID) {
-
 		Connection conn = DatabaseUtility.loadDatabase();
 		String sql = "DELETE FROM `marques` WHERE `id_marque` = ?";
 		PreparedStatement preparedStatement = null;
@@ -54,11 +72,10 @@ public class MarqueDAOImpl implements MarqueDAO {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-
+		supprimerMarqueDuMapping(marqueID);
 	}
 	
 	@Override

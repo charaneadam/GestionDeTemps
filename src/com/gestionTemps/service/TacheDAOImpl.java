@@ -38,6 +38,13 @@ public class TacheDAOImpl implements TacheDAO {
 			rs.next();
 			Long tacheID = rs.getLong(1);
 			tache.setIdTache(tacheID);
+			sql = "INSERT INTO `commits_tache`(`text_commit`, `date_commit`, `tache_id`) VALUES (?, ?, ?)";
+			String textCommit = "Tache " + tache.getNomTache() + " a été ajouté";
+			preparedStatement = (PreparedStatement) conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			preparedStatement.setString(1, textCommit);
+			preparedStatement.setString(2, sdf.format(new Date()));
+			preparedStatement.setLong(3, tache.getIdTache());
+			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -55,10 +62,15 @@ public class TacheDAOImpl implements TacheDAO {
 		Connection conn = DatabaseUtility.loadDatabase();
 		String sql = "DELETE FROM `taches` WHERE `id_tache` = ?";
 		PreparedStatement preparedStatement = null;
+		List<Marque> marques = recupererToutesLesMarquesDeLaTache(tacheID);
+		MarqueDAOImpl marqueDAOImpl = new MarqueDAOImpl();
 		try {
 			preparedStatement = (PreparedStatement) conn.prepareStatement(sql);
 			preparedStatement.setLong(1, tacheID);
 			preparedStatement.executeUpdate();
+			for (Marque marque : marques) {
+				marqueDAOImpl.supprimerMarque(marque.getIdMarque());
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -70,12 +82,21 @@ public class TacheDAOImpl implements TacheDAO {
 		Connection conn = DatabaseUtility.loadDatabase();
 		String sql;
 		marque = marqueDAOImpl.ajouterMarque(marque);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Tache tache = recupererTache(tacheID);
 		sql = "INSERT INTO `taches_marques`(`tache`, `marque`) VALUES (?, ?)";
 		PreparedStatement preparedStatement = null;
 		try {
 			preparedStatement = (PreparedStatement) conn.prepareStatement(sql);
 			preparedStatement.setLong(1, tacheID);
 			preparedStatement.setLong(2, marque.getIdMarque());
+			preparedStatement.executeUpdate();
+			sql = "INSERT INTO `commits_tache`(`text_commit`, `date_commit`, `tache_id`) VALUES (?, ?, ?)";
+			String textCommit = "Marque " + marque.getNomMarque() + " a été ajouté dans cette tache";
+			preparedStatement = (PreparedStatement) conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			preparedStatement.setString(1, textCommit);
+			preparedStatement.setString(2, sdf.format(new Date()));
+			preparedStatement.setLong(3, tache.getIdTache());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

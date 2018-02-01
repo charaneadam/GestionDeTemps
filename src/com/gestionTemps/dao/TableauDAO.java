@@ -5,6 +5,7 @@ import java.util.List;
 import com.gestionTemps.beans.Liste;
 import com.gestionTemps.beans.Tableau;
 import com.gestionTemps.beans.TableauCommit;
+import com.gestionTemps.beans.Tache;
 
 public interface TableauDAO {
 	
@@ -16,5 +17,9 @@ public interface TableauDAO {
 	public List<Liste> recupererToutesLesListesDuTableau(Long tableauID);
 	public List<TableauCommit> recupererToutesLesCommitesDuTableau(Long tableauID);
 	List<Tableau> recpererTousLesTableaux(Long idUtilisateur);
+	
+	public void ajouterTacheAuTableau(Tache tache);
+	public void supprimerTacheDuTableau(Long tacheID);
+	public List<Tache> recupererToutesLesTachesDuTableau(Long tableauID);
 
 }

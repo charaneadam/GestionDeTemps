@@ -13,6 +13,7 @@ public class Tache {
 	private Integer priorite;
 	private List<Marque> marquesDeTache;
 	private Long listeID;
+	private Long tableauID;
 	
 	public Long getIdTache() {
 		return idTache;
@@ -75,6 +76,12 @@ public class Tache {
 		DateLimiteDeTache = dateLimiteDeTache;
 		this.priorite = priorite;
 		this.listeID = listeID;
+	}
+	public Long getTableauID() {
+		return tableauID;
+	}
+	public void setTableauID(Long tableauID) {
+		this.tableauID = tableauID;
 	}
 	
 	
