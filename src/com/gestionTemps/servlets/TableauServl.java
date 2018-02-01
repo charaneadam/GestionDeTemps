@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.gestionTemps.beans.Liste;
+import com.gestionTemps.beans.Marque;
 import com.gestionTemps.beans.Tableau;
 import com.gestionTemps.beans.TableauCommit;
+import com.gestionTemps.beans.Tache;
 import com.gestionTemps.service.TableauService;
 
 @WebServlet("/Tableau")
@@ -26,13 +27,17 @@ public class TableauServl extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getSession().getAttribute("userID") != null) {
 			Tableau t = tableauService.retournerTableau(request);
-			List<Liste> l = tableauService.retournerListesDuTableau(t.getIdTableau());
+			if(t.getUserID() == request.getSession().getAttribute("userID"))
+				response.sendRedirect("tableaux");
 			List<TableauCommit> commits = tableauService.recupererToutesLesCommitesDuTableau(request);
-			t.setNombreDesListesDansLeTableau(l.size());
+			List<Marque> marques = tableauService.retournerToutesLesMarquesDuTableau(t.getIdTableau());
+			List<Tache> taches = tableauService.retournerToutesLesTachesDuTableau(t.getIdTableau());
 			t.setNbrCommits(commits.size());
 			request.setAttribute("tableau", t);
-			request.setAttribute("listes", l);
-			request.setAttribute("commits", commits);		
+			request.setAttribute("commits", commits);
+			request.setAttribute("marques", marques);
+			request.setAttribute("taches", taches);
+			request.setAttribute("nbrTaches", taches.size());
 			this.getServletContext().getRequestDispatcher("/WEB-INF/tableau.jsp").forward(request, response);
 		} else {
 			response.sendRedirect("./");

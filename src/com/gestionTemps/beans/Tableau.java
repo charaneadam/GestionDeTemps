@@ -14,7 +14,14 @@ public class Tableau {
 	private int nbrCommits;
 	private Long userID;
 	private Date dateCreation;
+	private Long tachesSupprimes;
 
+	public Long getTachesSupprimes() {
+		return tachesSupprimes;
+	}
+	public void setTachesSupprimes(Long tachesSupprimes) {
+		this.tachesSupprimes = tachesSupprimes;
+	}
 	public Date getDateCreation() {
 		return dateCreation;
 	}
@@ -72,6 +79,7 @@ public class Tableau {
 		this.nbrTags = 0;
 		this.nbrCommits = 0;
 		this.nombreDesListesDansLeTableau = 0;
+		this.tachesSupprimes = 0L;
 	}
 	public Tableau(String nomTableau, String descriptionTableau) {
 		super();
@@ -82,6 +90,7 @@ public class Tableau {
 		this.nbrTags = 0;
 		this.nbrCommits = 0;
 		this.nombreDesListesDansLeTableau = 0;
+		this.tachesSupprimes = 0L;
 	}
 	public Tableau(Tableau t) {
 		super();
@@ -90,6 +99,7 @@ public class Tableau {
 		this.nbrTags = 0;
 		this.nombreDesListesDansLeTableau = t.getNombreDesListesDansLeTableau();
 		this.listesDuTableau = new ArrayList<>(t.getListesDuTableau());
+		this.tachesSupprimes = 0L;
 	}
 	public int getNbrTags() {
 		return nbrTags;

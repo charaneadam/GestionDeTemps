@@ -288,7 +288,7 @@
                                                     <td><h4>23/12/2018</h4></td>
                                                     
                                                     <td class="center">
-                                                        <a href="#myModal" data-toggle="modal" ><button class="btn" style="width: 100%"><i class="icon-eye-open"></i> Voire</button></a>
+                                                        <a href="#myModal" data-toggle="modal" ><button class="btn" style="width: 100%"><i class="icon-eye-open"></i> Voir</button></a>
                                                         <button class="btn btn-danger" style="width: 100%"><i class="icon-remove icon-white"></i> Supprimer</button>
                                                     </td>
                                                 </tr>
@@ -329,7 +329,7 @@
                                                     <td><h4>02/12/2018</h4></td>
                                                     
                                                     <td class="center">
-                                                        <a href="#myModal" data-toggle="modal"><button class="btn" style="width: 100%"><i class="icon-eye-open"></i> Voire</button></a>
+                                                        <a href="#myModal" data-toggle="modal"><button class="btn" style="width: 100%"><i class="icon-eye-open"></i> Voir</button></a>
                                                         <button class="btn btn-danger" style="width: 100%"><i class="icon-remove icon-white"></i> Supprimer</button>
                                                     </td>
                                                 </tr>

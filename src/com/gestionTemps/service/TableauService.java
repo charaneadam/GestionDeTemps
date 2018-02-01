@@ -1,6 +1,7 @@
 package com.gestionTemps.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,6 +57,50 @@ public class TableauService {
 			marques.addAll(tacheDAOImpl.recupererToutesLesMarquesDeLaTache(tache.getIdTache()));
 		}
 		return marques;
+	}
+	
+	public Date getStartDate(List<Tache> taches) {
+		if(taches.isEmpty()) return null;
+		Date ans = taches.get(0).getDateDeCreationDeTache();
+		for (Tache tache : taches) {
+			if(ans.compareTo(tache.getDateDeCreationDeTache()) > 0)
+				ans = tache.getDateDeCreationDeTache();
+		}
+		return ans;
+	}
+	
+	public Date getEndDate(List<Tache> taches) {
+		if(taches.isEmpty()) return null;
+		Date ans = taches.get(0).getDateLimiteDeTache();
+		for (Tache tache : taches) {
+			if(ans.compareTo(tache.getDateLimiteDeTache()) < 0)
+				ans = tache.getDateLimiteDeTache();
+		}
+		return ans;
+	}
+	
+	public int getHighPriorityCount(List<Tache> taches) {
+		int ans = 0;
+		for (Tache tache : taches) {
+			if(tache.getPriorite() >= 3) ans++;
+		}
+		return ans;
+	}
+	
+	public int getLowPriorityCount(List<Tache> taches) {
+		int ans = 0;
+		for (Tache tache : taches) {
+			if(tache.getPriorite() <= 1) ans++;
+		}
+		return ans;
+	}
+	
+	public int getNormalPriorityCount(List<Tache> taches) {
+		int ans = 0;
+		for (Tache tache : taches) {
+			if(tache.getPriorite() == 2) ans++;
+		}
+		return ans;
 	}
 
 }

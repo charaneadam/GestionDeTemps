@@ -166,12 +166,14 @@ public class TableauDAOImplem implements TableauDAO {
 				String tableauDesc = resultat.getString("desc_tableau");
 				Date dateCreation = resultat.getDate("date_creation");
 				Long userID = resultat.getLong("utilisateur_id");
+				Long deletedTasks = resultat.getLong("taches_termines");
 				Tableau tableau = new Tableau();
 				tableau.setIdTableau(tableauId);
 				tableau.setNomTableau(tableauNom);
 				tableau.setDescriptionTableau(tableauDesc);
 				tableau.setUserID(userID);
 				tableau.setDateCreation(dateCreation);
+				tableau.setTachesSupprimes(deletedTasks);
 				tableaux.add(tableau);
 			}
 		} catch (SQLException e) {
@@ -335,8 +337,36 @@ public class TableauDAOImplem implements TableauDAO {
 			preparedStatement.setString(2, sdf.format(new Date()));
 			preparedStatement.setString(3, tableau.getIdTableau().toString());
 			preparedStatement.executeUpdate();
+			incrementDeletedTasks(t.getIdTache());
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void incrementDeletedTasks(Long tableauID) {
+		TableauDAOImplem tableauDAOImplem = new TableauDAOImplem();
+		Tableau t = tableauDAOImplem.recupererTableau(tableauID);
+		Connection conn = DatabaseUtility.loadDatabase();
+		String sql = "UPDATE `tableaux` SET `taches_termines`= ? WHERE `id_tableau` = " + tableauID;
+		PreparedStatement preparedStatement = null;
+		try {
+			preparedStatement = (PreparedStatement) conn.prepareStatement(sql);
+			preparedStatement.setLong(1, t.getTachesSupprimes()+1);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
