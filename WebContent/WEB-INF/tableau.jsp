@@ -240,7 +240,9 @@
                                     <div class="span12">
                                        <div class="table-toolbar">
                                           <div class="btn-group">
-                                             <a href="#myModal" data-toggle="modal"><button class="btn btn-success">Ajouter nouveau <i class="icon-plus icon-white"></i></button></a>
+                                             <a href="#ajouterTache" data-toggle="modal">
+                                             	<button class="btn btn-success">Ajouter nouvelle tache<i class="icon-plus icon-white"></i></button>
+                                             </a>
                                           </div>
                                           
                                        </div>
@@ -486,6 +488,79 @@
                                     </span>
                                 </div>
                             </div>
+                            
+                            <!-- Debut d'ajout de tache -->
+                            <div id="ajouterTache" class="modal hide block" style="width: 60%;margin-left: unset;left: 20%;">
+                            	<form action="tache" method="post">
+	                                <div class="modal-header">
+	                                    <button data-dismiss="modal" class="close" type="button">&times;</button>
+	                                    <h3>Ajouter une nouvelle tache</h3>
+	                                </div>
+	                                <div class="modal-body block-content" style="max-height: 580px;">
+	                                    <div class="span12" >
+	                                        <span class="span8" >
+	                                            <div class="span7">
+	                                                <h5><i class="fa fa-tasks" aria-hidden="true" style="color:#999" ></i> Titre</h5>
+	                                                <input name="titre" style="width: 100%;" type="text" class="input-xlarge "  placeholder="Titre de la tache">
+	                                            </div>
+	                                            <div class="span5">
+	                                                <h5><i class="fa fa-thermometer-full" aria-hidden="true" style="color:#999" ></i> Priorité</h5>
+	                                                <select name="priorite" id="priorite" style="width: 100%;"  class="input-xlarge "  title="priorite">
+	                                                    <option value="3"> Haute</option>
+	                                                    <option value="2"> Normale</option>
+	                                                    <option value="1"> Basse</option>
+	                                                </select>
+	                                            </div>
+	                                            <h5><i class="fa fa-align-justify" aria-hidden="true" style="color:#999" ></i> Description</h5>
+	                                            
+	                                            </p>
+	                                            <textarea name="desc" placeholder="Description de la tache" style="width: 100%; height: 120px;" ></textarea>
+	                                        </span>
+	                                        <span class="span4" style="float: right;">
+	                                            <div class="span6">
+	                                                <h5><i class="icon-time" aria-hidden="true" style="color:#999" ></i> Date Debut</h5>
+	                                                <input name="dateDebut" style="width: 78%;" type="date" class="input-xlarge datepicker" id="date01">
+	                                            </div>
+	                                            <div class="span6">
+	                                                <h5><i class="icon-time" aria-hidden="true" style="color:#999" ></i> Date Fin</h5>
+	                                                <input name="dateFin" style="width: 78%;" type="date" class="input-xlarge datepicker" id="date01">
+	                                            </div>
+	                                        </span>
+	                                    </div>
+	                                    
+	                                    
+	                                    <div style="margin-left:0" class="span12">
+	                                        <div class="span6">
+	                                            <h5><i class="fa fa-list" aria-hidden="true" style="color:#999" ></i> Ckecklists</h5>
+	                                            <div id="ajouterCheckListes">
+	                                            </div>
+	                                            <br>
+	                                            <div  id="checklistInput">
+	                                                <input type="text" id="textCheckliste"  class="input-xlarge"  placeholder="Entrer votre checklist">
+	                                                <button type="button" class="btn btn-primary" onclick="ajouterCheckList();">Ajouter checkliste</button>   
+	                                            </div>
+	                                        </div>
+	                                        <div class="span6">
+	                                            <h5><i class="fa fa-tags" aria-hidden="true" style="color:#999" ></i> Marques</h5>
+	                                            <div id="tags">
+	                                                <label id="" class="uniform" style="padding-left: 15px;">
+	                                                    <input class="uniform_on" type="text" id="optionsCheckbox" name="marques"
+	                                                    placeholder="entrez vos marques séparées par des virgules" style="width: 95%">
+	                                                </label>
+	                                            </div>
+	                                            <br>
+	                                        </div>
+	                                    </div>
+	                                    
+	                                    
+	                                    <span class="span4" id="but" style="float: right;">
+	                                        <input type="submit" class="btn btn-large btn-block" value='Ajouter tâche'/>                      
+	                                    </span>
+	                                </div>
+                                </form>
+                            </div>
+                            <!-- Fin d'ajout de tache -->
+                            
                         </div>
                     </div>
 			    </div>
@@ -507,6 +582,12 @@
             // As pointed out in comments, 
             // it is superfluous to have to manually call the modal.
             // $('#addBookDialog').modal('show');
+        }
+        
+        function ajouterCheckList(){
+        	var text = document.getElementById('textCheckliste').value;
+        	document.getElementById('ajouterCheckListes').innerHTML += "<input type='checkbox' style='padding-left: 15px;' name='checkListes' checked >" + text + "<br>";
+        	document.getElementById('textCheckliste').value = "";
         }
         
         </script>
