@@ -24,7 +24,7 @@ public class TableauDAOImplem implements TableauDAO {
 	@Override
 	public Tableau ajouterTableau(Tableau tableau) {
 		Connection conn = DatabaseUtility.loadDatabase();
-		String sql = "INSERT INTO `tableaux`(`nom_tableau`, `desc_tableau`, `utilisateur_id`, `date_creation`) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO `tableaux`(`nom_tableau`, `desc_tableau`, `utilisateur_id`, `date_creation`, `taches_termines`) VALUES (?, ?, ?, ?, 0)";
 		PreparedStatement preparedStatement = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try {
@@ -377,15 +377,18 @@ public class TableauDAOImplem implements TableauDAO {
         Statement statement;
 		try {
 			statement = conn.createStatement();
-			ResultSet resultat = statement.executeQuery("SELECT * FROM `tableaux_taches` WHERE `tableau` = " + tableauID.toString());
-			Set<Long> taches_id = new HashSet<Long>();
+			ResultSet resultat = statement.executeQuery("SELECT * FROM `taches` WHERE `tableau_id` = " + tableauID.toString());
 			while(resultat.next()) {
-				taches_id.add(resultat.getLong("tache"));
-			}
-			Iterator<Long> it = taches_id.iterator();
-			TacheDAOImpl tacheDAOImpl = new TacheDAOImpl();
-			while(it.hasNext()) {
-				taches.add(tacheDAOImpl.recupererTache(it.next()));
+				// id_tache	nom_tache	description_tache	date_creation	date_limite	priorite	liste_id	tableau_id
+				Long id_tache = resultat.getLong("id_tache");
+				String nom_tache = resultat.getString("nom_tache");
+				String description_tache = resultat.getString("description_tache");
+				Date date_creation = resultat.getDate("date_creation");
+				Date date_limite = resultat.getDate("date_limite");
+				int priorite = resultat.getInt("priorite");
+				Tache tache = new Tache(nom_tache, description_tache, date_creation, date_limite, priorite, tableauID);
+				tache.setIdTache(id_tache);
+				taches.add(tache);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

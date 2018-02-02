@@ -12,6 +12,7 @@ public class Tableau {
 	private int nombreDesListesDansLeTableau;
 	private int nbrTags;
 	private int nbrCommits;
+	private int nbrTaches;
 	private Long userID;
 	private Date dateCreation;
 	private Long tachesSupprimes;
@@ -106,6 +107,12 @@ public class Tableau {
 	}
 	public void setNbrTags(int nbrTags) {
 		this.nbrTags = nbrTags;
+	}
+	public int getNbrTaches() {
+		return nbrTaches;
+	}
+	public void setNbrTaches(int nbrTaches) {
+		this.nbrTaches = nbrTaches;
 	}
 	
 	

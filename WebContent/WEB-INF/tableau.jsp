@@ -55,15 +55,17 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
                             <li class="dropdown">
-                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> Vincent Gabriel <i class="caret"></i>
+                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i>
+                                	<%= session.getAttribute("userFirstName") %> <%= session.getAttribute("userLastName") %>
+                                <i class="caret"></i>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a tabindex="-1" href="#">Profile</a>
+                                        <a tabindex="-1" href="#">Profil</a>
                                     </li>
                                     <li class="divider"></li>
                                     <li>
-                                        <a tabindex="-1" href="login.html">Logout</a>
+                                        <a tabindex="-1" href="logout">Deconnexion</a>
                                     </li>
                                 </ul>
                             </li>
@@ -109,7 +111,7 @@
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">${ tableau.nomTableau }</div>
-                                    <div class="pull-right"><span class="badge badge-info">${ tableau.nombreDesListesDansLeTableau }</span>
+                                    <div class="pull-right"><span class="badge badge-info">${ tableau.nbrTaches }</span>
                                     <div class="pull-right">
                                     </div>
                                 </div>
@@ -118,7 +120,8 @@
                                 <div class="span12">
                                     <div id="containerIntro">
                                         <h2>${ tableau.nomTableau }</h2>
-                                        <p style="margin-bottom: 5px"><i class="fa fa-calendar"></i>&nbsp;&nbsp;De&nbsp;&nbsp; <i class="icon-time"></i> 20/12/2015 &nbsp;à&nbsp;&nbsp; <i class="icon-time"></i> 15/01/2016 </p>
+                                        <p style="margin-bottom: 5px"><i class="fa fa-calendar"></i>&nbsp;&nbsp;De&nbsp;&nbsp; 
+                                        <i class="icon-time"></i> ${ dateDebut } &nbsp;à&nbsp;&nbsp; <i class="icon-time"></i> ${ dateLimite } </p>
                                     </div>
                                 </div>
                                 <div class="span12">
@@ -137,9 +140,9 @@
                                        <h5><i class="icon-time" aria-hidden="true" style="color:#999" ></i> Date creation</h5>
                                        <p style="width: 100%;" >${ tableau.dateCreation }</p>
                                        <h5><i class="icon-time" aria-hidden="true" style="color:#999" ></i> Date debut</h5>
-                                       <p style="width: 100%;">20/12/2018</p>
+                                       <p style="width: 100%;">${ dateDebut }</p>
                                        <h5><i class="icon-time" aria-hidden="true" style="color:#999" ></i> Date fin</h5>
-                                       <p style="width: 100%;" >20/12/2018</p>
+                                       <p style="width: 100%;" >${ dateLimite }</p>
                                     </div>
                                     <div class="span3" style="">
                                         <div style="margin-top: 30px;background-color: #999999">
@@ -157,13 +160,13 @@
                                     <span class="span4">
                                         <h5>Tâches</h5>
                                         <div class="span4">
-                                            <i class="fa fa-check-circle fa-3x" style="color:#999">15</i>                                              
+                                            <i class="fa fa-check-circle fa-3x" style="color:#999">${ nbrTaches + tableau.tachesSupprimes }</i>                                              
                                         </div>
                                         <div class="span4">
-                                            <i class="fa fa-minus-circle fa-3x" style="color:#999">5</i>                                              
+                                            <i class="fa fa-minus-circle fa-3x" style="color:#999">${ tableau.tachesSupprimes }</i>                                              
                                         </div>
                                         <div class="span3">
-                                            <i class="fa fa-refresh fa-3x" style="color:#999">17 </i>                                            
+                                            <i class="fa fa-refresh fa-3x" style="color:#999">${ nbrTaches }</i>                                            
                                         </div>
                                     </span>
                                     <span class="span7" style="background-color: ">
@@ -171,20 +174,24 @@
                                         <span class="span4">
                                         	<i class="fa fa-cog fa-2x" style="color:#999"></i>
                                         	<i class="fa fa-cog fa-2x" style="color:#999"></i>
-                                            <i class="fa fa-cog fa-2x" style="color:#999">15 Haute</i>                                              
+                                            <i class="fa fa-cog fa-2x" style="color:#999">${ hautes } Haute(s)</i>                                              
                                         </span>
                                         <span class="span4">
                                         	<i class="fa fa-cog fa-2x" style="color:#999"></i>
-                                            <i class="fa fa-cog fa-2x" style="color:#999">5 Normale</i>                                             
+                                            <i class="fa fa-cog fa-2x" style="color:#999">${ moyennes } Normale(s)</i>                                             
                                         </span>
                                         <span class="span3">
-                                            <i class="fa fa-cog fa-2x" style="color:#999">17 Basse</i>                                          
+                                            <i class="fa fa-cog fa-2x" style="color:#999">${ basses } Basse(s)</i>                                          
                                         </span>
                                     </span>
                                 </div>
                                 <span class="span5">
                                     <h5>Marques</h5>
-                                    <p>JavaEE / projet integre / etudes / network / pc</p>
+                                    <p>
+                                    	<c:forEach items="${ marques }" var="marque" varStatus="status">
+                                    		<a href="${ marque.idMarque }">${ marque.nomMarque }</a> <c:if test="${ !status.last }"> / </c:if>
+                                    	</c:forEach>
+                                    </p>
                                 </span>
                                 <span class="span2">
                                      <div class="block">
@@ -226,7 +233,7 @@
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">Taches de  ${ tableau.nomTableau }</div>
-                                    <div class="pull-right"><span class="badge badge-info">${ tableau.nombreDesListesDansLeTableau }</span>
+                                    <div class="pull-right"><span class="badge badge-info">${ tableau.nbrTaches }</span>
                                     </div>
                                 </div>
                                 <div class="block-content collapse in" >

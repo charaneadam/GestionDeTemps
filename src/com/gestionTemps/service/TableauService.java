@@ -41,12 +41,7 @@ public class TableauService {
 	}
 	
 	public List<Tache> retournerToutesLesTachesDuTableau(Long tableauID){
-		ListeDAOImpl listeDAOImpl = new ListeDAOImpl();
-		List<Liste> listes = retournerListesDuTableau(tableauID);
-		List<Tache> taches = new ArrayList<Tache>();
-		for (Liste liste : listes) 
-			taches.addAll(listeDAOImpl.recupereToutesLesTachesDeLaListe(liste.getIdListe()));
-		return taches;
+		return tableauDAOImplem.recupererToutesLesTachesDuTableau(tableauID);
 	}
 	
 	public List<Marque> retournerToutesLesMarquesDuTableau(Long tableauID){
@@ -54,6 +49,7 @@ public class TableauService {
 		TacheDAOImpl tacheDAOImpl = new TacheDAOImpl();
 		List<Marque> marques = new ArrayList<Marque>();
 		for (Tache tache : taches) {
+			System.out.println(tache.getIdTache());
 			marques.addAll(tacheDAOImpl.recupererToutesLesMarquesDeLaTache(tache.getIdTache()));
 		}
 		return marques;

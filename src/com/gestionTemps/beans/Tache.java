@@ -68,14 +68,14 @@ public class Tache {
 		// TODO Auto-generated constructor stub
 	}
 	public Tache(String nomTache, String descriptionTache, Date dateDeCreationDeTache, Date dateLimiteDeTache,
-			Integer priorite, Long listeID) {
+			Integer priorite, Long tableauID) {
 		super();
 		this.nomTache = nomTache;
 		this.descriptionTache = descriptionTache;
 		this.dateDeCreationDeTache = dateDeCreationDeTache;
 		DateLimiteDeTache = dateLimiteDeTache;
 		this.priorite = priorite;
-		this.listeID = listeID;
+		this.tableauID = tableauID;
 	}
 	public Long getTableauID() {
 		return tableauID;

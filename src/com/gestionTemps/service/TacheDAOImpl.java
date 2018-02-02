@@ -22,7 +22,7 @@ public class TacheDAOImpl implements TacheDAO {
 	@Override
 	public Tache ajouterTache(Tache tache) {
 		Connection conn = DatabaseUtility.loadDatabase();
-		String sql = "INSERT INTO `taches`(`nom_tache`, `description_tache`, `date_creation`, `date_limite`, `priorite`, `liste_id`) VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO `taches`(`nom_tache`, `description_tache`, `date_creation`, `date_limite`, `priorite`, `tableau_id`) VALUES (?, ?, ?, ?, ?, ?)";
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		PreparedStatement preparedStatement = null;
 		try {
@@ -32,7 +32,7 @@ public class TacheDAOImpl implements TacheDAO {
 			preparedStatement.setString(3, sdf.format(tache.getDateDeCreationDeTache()));
 			preparedStatement.setString(4, sdf.format(tache.getDateLimiteDeTache()));
 			preparedStatement.setInt(5, tache.getPriorite());
-			preparedStatement.setLong(6, tache.getListeID());
+			preparedStatement.setLong(6, tache.getTableauID());
 			preparedStatement.executeUpdate();
 			ResultSet rs = preparedStatement.getGeneratedKeys();
 			rs.next();
@@ -144,7 +144,7 @@ public class TacheDAOImpl implements TacheDAO {
 				Date dateCreation = resultat.getDate("date_creation");
 				Date dateLimite = resultat.getDate("date_limite");
 				int priorite = resultat.getInt("priorite");
-				Long listeID = resultat.getLong("liste_id");
+				Long tableauID = resultat.getLong("tableau_id");
 				Tache tache = new Tache();
 				tache.setIdTache(tacheId);
 				tache.setNomTache(tacheNom);
@@ -152,7 +152,7 @@ public class TacheDAOImpl implements TacheDAO {
 				tache.setDateDeCreationDeTache(dateCreation);
 				tache.setDateLimiteDeTache(dateLimite);
 				tache.setPriorite(priorite);
-				tache.setListeID(listeID);
+				tache.setTableauID(tableauID);
 				taches.add(tache);
 			}
 		} catch (SQLException e) {
@@ -179,7 +179,7 @@ public class TacheDAOImpl implements TacheDAO {
 				Date dateCreation = resultat.getDate("date_creation");
 				Date dateLimite = resultat.getDate("date_limite");
 				int priorite = resultat.getInt("priorite");
-				Long listeID = resultat.getLong("liste_id");
+				Long tableauID = resultat.getLong("tableau_id");
 				Tache tache = new Tache();
 				tache.setIdTache(tacheID);
 				tache.setNomTache(tacheNom);
@@ -187,7 +187,7 @@ public class TacheDAOImpl implements TacheDAO {
 				tache.setDateDeCreationDeTache(dateCreation);
 				tache.setDateLimiteDeTache(dateLimite);
 				tache.setPriorite(priorite);
-				tache.setListeID(listeID);
+				tache.setTableauID(tableauID);
 				taches.add(tache);
 			}
 		} catch (SQLException e) {
