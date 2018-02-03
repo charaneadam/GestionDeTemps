@@ -10,5 +10,4 @@ public interface MarqueDAO {
 	public void supprimerMarque(Long marqueID);
 	public Marque recupererMarque(Long marqueID);
 	public List<Marque> recupererToutesLesMarques();
-
 }

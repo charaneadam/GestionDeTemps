@@ -232,7 +232,7 @@
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">Taches de  ${ tableau.nomTableau }</div>
+                                    <div class="muted pull-left">Taches du  ${ tableau.nomTableau }</div>
                                     <div class="pull-right"><span class="badge badge-info">${ tableau.nbrTaches }</span>
                                     </div>
                                 </div>
@@ -250,7 +250,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Titre</th>
-                                                    <th>Avancement</th>
+                                                    <th>Temps restant</th>
                                                     <th width="14%">Date Debut </th>
                                                     <th width="14">Date fin</th>
                                                     <th width="12%"></th>

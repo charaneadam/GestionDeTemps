@@ -2,7 +2,9 @@ package com.gestionTemps.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -45,14 +47,16 @@ public class TableauService {
 	}
 	
 	public List<Marque> retournerToutesLesMarquesDuTableau(Long tableauID){
+		MarqueDAOImpl marqueDAOImpl = new MarqueDAOImpl();
 		List<Tache> taches = retournerToutesLesTachesDuTableau(tableauID);
 		TacheDAOImpl tacheDAOImpl = new TacheDAOImpl();
 		List<Marque> marques = new ArrayList<Marque>();
+		Set<Long> marques_id = new HashSet<Long>();
 		for (Tache tache : taches) {
-			System.out.println(tache.getIdTache());
-			List<Marque> marquesTmp = tacheDAOImpl.recupererToutesLesMarquesDeLaTache(tache.getIdTache());
-			if(marquesTmp != null)
-				marques.addAll(marquesTmp);
+			marques_id.addAll(tacheDAOImpl.recupererToutesLesMarquesIDDeLaTache(tache.getIdTache()));
+		}
+		for (Long marqueID : marques_id) {
+			marques.add(marqueDAOImpl.recupererMarque(marqueID));
 		}
 		return marques;
 	}

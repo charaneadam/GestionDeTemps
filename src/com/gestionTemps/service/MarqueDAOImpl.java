@@ -15,6 +15,8 @@ public class MarqueDAOImpl implements MarqueDAO {
 
 	@Override
 	public Marque ajouterMarque(Marque marque) {
+		Marque m = marqueExisteDeja(marque.getNomMarque());
+		if(m != null) return m;
 		Connection conn = DatabaseUtility.loadDatabase();
 		String sql = "INSERT INTO `marques`(`nom_marque`) VALUES (?)";
 		PreparedStatement preparedStatement = null;
@@ -124,6 +126,15 @@ public class MarqueDAOImpl implements MarqueDAO {
 		}
         
 		return marques;
+	}
+
+	private Marque marqueExisteDeja(String nomMarque) {
+		List<Marque> marques = recupererToutesLesMarques();
+		for (Marque marque : marques) {
+			if(marque.getNomMarque().equals(nomMarque))
+				return marque;
+		}
+		return null;
 	}
 
 }

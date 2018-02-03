@@ -2,6 +2,8 @@ package com.gestionTemps.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +37,6 @@ public class TacheService {
 	}
 	
 	public void ajouterTache(HttpServletRequest request) {
-		// `id_tache`, `nom_tache`, `description_tache`, `date_creation`, `date_limite`, `priorite`, `liste_id`, `tableau_id`
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String nomTache = request.getParameter("titre");
 		String descriptionTache = request.getParameter("desc");
@@ -51,7 +52,11 @@ public class TacheService {
 		//String[] checkListes = request.getParameterValues("checkListes");
 		Long tableauID = Long.parseLong(request.getParameter("tableauID"));
 		Tache tache = new Tache(nomTache, descriptionTache, dateDebut, dateFin, priorite, tableauID);
-		tacheDAOImpl.ajouterTache(tache);
+		tache = tacheDAOImpl.ajouterTache(tache);
+		List<String> marques = new ArrayList<String>(Arrays.asList(request.getParameter("marques").split(",")));
+		for (String marqueNom : marques) {
+			tacheDAOImpl.ajouterMarqueDansTache(tache.getIdTache(), new Marque(marqueNom));
+		}
 	}
 	
 }
