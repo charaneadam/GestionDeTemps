@@ -50,7 +50,9 @@ public class TableauService {
 		List<Marque> marques = new ArrayList<Marque>();
 		for (Tache tache : taches) {
 			System.out.println(tache.getIdTache());
-			marques.addAll(tacheDAOImpl.recupererToutesLesMarquesDeLaTache(tache.getIdTache()));
+			List<Marque> marquesTmp = tacheDAOImpl.recupererToutesLesMarquesDeLaTache(tache.getIdTache());
+			if(marquesTmp != null)
+				marques.addAll(marquesTmp);
 		}
 		return marques;
 	}
