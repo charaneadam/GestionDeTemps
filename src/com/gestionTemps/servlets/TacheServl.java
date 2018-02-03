@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.gestionTemps.beans.Marque;
 import com.gestionTemps.beans.Tache;
 import com.gestionTemps.service.TacheService;
+import com.google.gson.Gson;
 
 @WebServlet("/TacheServl")
 public class TacheServl extends HttpServlet {
@@ -32,8 +33,9 @@ public class TacheServl extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		tacheService.ajouterMarqueALaTache(request);
-		doGet(request, response);
+		Gson gson = new Gson();
+		tacheService.ajouterTache(request);
+		response.sendRedirect("tableau?id="+request.getParameter("tableauID"));
 	}
 
 }

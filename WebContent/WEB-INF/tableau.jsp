@@ -554,6 +554,7 @@
 	                                    
 	                                    
 	                                    <span class="span4" id="but" style="float: right;">
+	                                    	<input type="hidden" name="tableauID" value="${ tableau.idTableau }">
 	                                        <input type="submit" class="btn btn-large btn-block" value='Ajouter tâche'/>                      
 	                                    </span>
 	                                </div>
