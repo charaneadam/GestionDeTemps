@@ -59,4 +59,8 @@ public class TacheService {
 		}
 	}
 	
+	public void supprimerTache(HttpServletRequest request) {
+		tacheDAOImpl.supprimerTache(Long.parseLong(request.getParameter("id")));
+	}
+	
 }

@@ -9,11 +9,15 @@ public class Tache {
 	private String nomTache;
 	private String descriptionTache;
 	private Date dateDeCreationDeTache;
-	private Date DateLimiteDeTache;
+	private Date dateLimiteDeTache;
 	private Integer priorite;
 	private List<Marque> marquesDeTache;
 	private Long listeID;
 	private Long tableauID;
+	private String marques;
+	private int nbrMarques;
+	private double pourcentage;
+	private String jsonData; 
 	
 	public Long getIdTache() {
 		return idTache;
@@ -40,10 +44,10 @@ public class Tache {
 		this.dateDeCreationDeTache = dateDeCreationDeTache;
 	}
 	public Date getDateLimiteDeTache() {
-		return DateLimiteDeTache;
+		return dateLimiteDeTache;
 	}
 	public void setDateLimiteDeTache(Date dateLimiteDeTache) {
-		DateLimiteDeTache = dateLimiteDeTache;
+		this.dateLimiteDeTache = dateLimiteDeTache;
 	}
 	public Integer getPriorite() {
 		return priorite;
@@ -73,15 +77,40 @@ public class Tache {
 		this.nomTache = nomTache;
 		this.descriptionTache = descriptionTache;
 		this.dateDeCreationDeTache = dateDeCreationDeTache;
-		DateLimiteDeTache = dateLimiteDeTache;
+		this.dateLimiteDeTache = dateLimiteDeTache;
 		this.priorite = priorite;
 		this.tableauID = tableauID;
+		this.nbrMarques = 0;
 	}
 	public Long getTableauID() {
 		return tableauID;
 	}
 	public void setTableauID(Long tableauID) {
 		this.tableauID = tableauID;
+	}
+	public String getMarques() {
+		return marques;
+	}
+	public void setMarques(String marques) {
+		this.marques = marques;
+	}
+	public int getNbrMarques() {
+		return nbrMarques;
+	}
+	public void setNbrMarques(int nbrMarques) {
+		this.nbrMarques = nbrMarques;
+	}
+	public double getPourcentage() {
+		return pourcentage;
+	}
+	public void setPourcentage(double pourcentage) {
+		this.pourcentage = pourcentage;
+	}
+	public String getJsonData() {
+		return jsonData;
+	}
+	public void setJsonData(String jsonData) {
+		this.jsonData = jsonData;
 	}
 	
 	

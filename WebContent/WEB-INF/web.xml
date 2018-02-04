@@ -80,7 +80,6 @@
     <servlet-name>Profil</servlet-name>
     <url-pattern>/profil</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>Deconnecter</servlet-name>
     <servlet-class>com.gestionTemps.servlets.Deconnecter</servlet-class>
@@ -88,6 +87,15 @@
   <servlet-mapping>
     <servlet-name>Deconnecter</servlet-name>
     <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>TacheSuppr</servlet-name>
+    <servlet-class>com.gestionTemps.servlets.TacheSuppr</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TacheSuppr</servlet-name>
+    <url-pattern>/tacheSuppr</url-pattern>
   </servlet-mapping>
   
   <jsp-config>

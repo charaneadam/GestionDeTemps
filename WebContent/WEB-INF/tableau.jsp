@@ -249,18 +249,18 @@
                                         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example2">
                                             <thead>
                                                 <tr>
-                                                    <th>Titre</th>
-                                                    <th>Temps restant</th>
+                                                    <th width="20%">Titre</th>
+                                                    <th width="40%">Temps restant</th>
                                                     <th width="14%">Date Debut </th>
                                                     <th width="14">Date fin</th>
                                                     <th width="12%"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            <c:forEach items="${ taches }" var="tache" varStatus="status">
                                                 <tr class="odd gradeX">
                                                     <td width="">
-                                                        <a onclick="tggelDropDown('1');"><h5><i id="iconAngle1" class="fa fa-angle-double-right" aria-hidden="true"></i> Debut de conception</h5></a>
-                                                        </div>
+                                                        <a onclick="tggelDropDown('1');"><h5><i id="iconAngle1" class="fa fa-angle-double-right" aria-hidden="true"></i> ${ tache.nomTache }</h5></a>
                                                         <div id="uniform1" style="display: none;">
                                                             <label id="" class="uniform" style="padding-left: 15px;">
                                                                 <input class="uniform_on" type="checkbox" id="optionsCheckbox" value="option1" disabled>
@@ -272,35 +272,35 @@
                                                             </label>
                                                         </div>
                                                         <div id="racc">
+                                                        <c:if test="${ !empty tache.descriptionTache }">
                                                             <div class="span2" style="">
                                                                 <i class="fa fa-align-justify" aria-hidden="true" style="color:#999" ></i>
                                                             </div>
+                                                        </c:if>
                                                             <div class="span2" >
                                                                 <i class="fa fa-list" aria-hidden="true" style="color:#999"></i>
                                                             </div>
                                                             <div class="span3" >
-                                                                <span ><i class="fa fa-tags" aria-hidden="true" style="color:#999"></i>&nbsp;4</span>
-                                                            </div>
-                                                            <div class="span3" >
-                                                                <span ><i class="fa fa-share-alt" aria-hidden="true" style="color:#999"></i>&nbsp;12</span>
+                                                                <span ><i class="fa fa-tags" aria-hidden="true" style="color:#999"></i>${ tache.nbrMarques }</span>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td class="center"> 
                                                         <div class="progress progress-striped active" style="height: 35px;margin-top: 10px;color: #999999">
-                                                            <div style="width: 60%;" class="bar"><h4>60%</h4></div>
+                                                            <div style="width: ${tache.pourcentage}%;" class="bar"><h4>${tache.pourcentage}%</h4></div>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <h4>20/10/2018</h4>
+                                                        <h4>${ tache.dateDeCreationDeTache }</h4>
                                                     </td>
-                                                    <td><h4>23/12/2018</h4></td>
+                                                    <td><h4>${ tache.dateLimiteDeTache }</h4></td>
                                                     
                                                     <td class="center">
                                                         <a href="#myModal" data-toggle="modal" ><button class="btn" style="width: 100%"><i class="icon-eye-open"></i> Voir</button></a>
-                                                        <button class="btn btn-danger" style="width: 100%"><i class="icon-remove icon-white"></i> Supprimer</button>
+                                                        <a href="tacheSuppr?id=${ tache.idTache }&tableauID=${tableau.idTableau}" class="btn btn-danger" style="width: 84%"><i class="icon-remove icon-white"></i> Supprimer</a>
                                                     </td>
                                                 </tr>
+                                            </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>

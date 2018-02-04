@@ -13,6 +13,7 @@ import com.gestionTemps.beans.Marque;
 import com.gestionTemps.beans.Tableau;
 import com.gestionTemps.beans.TableauCommit;
 import com.gestionTemps.beans.Tache;
+import com.google.gson.Gson;
 
 public class TableauService {
 	private TableauDAOImplem tableauDAOImplem = new TableauDAOImplem();
@@ -43,7 +44,24 @@ public class TableauService {
 	}
 	
 	public List<Tache> retournerToutesLesTachesDuTableau(Long tableauID){
-		return tableauDAOImplem.recupererToutesLesTachesDuTableau(tableauID);
+		List<Tache> taches = tableauDAOImplem.recupererToutesLesTachesDuTableau(tableauID);
+		TacheDAOImpl tacheDAOImpl = new TacheDAOImpl();
+		Gson gson = new Gson();
+		for (Tache tache : taches) {
+			List<Marque> marques = tacheDAOImpl.recupererToutesLesMarquesDeLaTache(tache.getIdTache());
+			if(marques != null)
+				tache.setNbrMarques(marques.size());
+			String m = "";
+			for (Marque marque : marques) {
+				m += marque.getNomMarque() + ",";
+			}
+			tache.setMarques(m);
+			Double b = (double) Math.abs(tache.getDateLimiteDeTache().getTime()*1.0 - tache.getDateDeCreationDeTache().getTime()*1.0);
+			Double a = (double) Math.abs(new Date().getTime()*1.0 - tache.getDateDeCreationDeTache().getTime()*1.0);
+			tache.setPourcentage(Math.floor( (100*(a/b) * 100) / 100));
+			tache.setJsonData(gson.toJson(tache));
+		}
+		return taches;
 	}
 	
 	public List<Marque> retournerToutesLesMarquesDuTableau(Long tableauID){
