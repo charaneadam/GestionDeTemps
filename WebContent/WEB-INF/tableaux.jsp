@@ -88,7 +88,7 @@
 	                            <div class="block">
 	                                <div class="navbar navbar-inner block-header">
 	                                    <div class="muted pull-left">${ tableau.nomTableau }</div>
-	                                    <div class="pull-right"><span class="badge badge-info">${ tableau.nombreDesListesDansLeTableau }</span>
+	                                    <div class="pull-right"><span class="badge badge-info">${ tableau.nbrTaches }</span>
 	
 	                                    </div>
 	                                </div>
