@@ -35,7 +35,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a tabindex="-1" href="#">Profil</a>
+                                        <a tabindex="-1" href="profil">Profil</a>
                                     </li>
                                     <li class="divider"></li>
                                     <li>
